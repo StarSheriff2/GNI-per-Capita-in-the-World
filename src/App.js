@@ -3,6 +3,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import GniWorld from './components/GniWorld';
 
 // import Header from './components/Header';
 
@@ -11,11 +12,9 @@ function App() {
     <>
       <Router>
         <div className="App">
-          {/* <Header /> */}
           <Switch>
             <Route exact path="/">
-              {/* <Countries /> */}
-              <h1>Countries here</h1>
+              <GniWorld />
             </Route>
             {/* <Route path="/Missions">
               <Missions />
