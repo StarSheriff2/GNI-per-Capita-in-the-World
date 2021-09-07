@@ -51,25 +51,16 @@ const reducer = (state = initialState, action) => {
     case FETCH_SUCCEDED: {
       const newEntities = [[], []];
       action.payload.forEach((obj) => {
-        if (obj.country.value.includes('income')) {
-          newEntities[1].push(
-            {
-              incomeGroup: obj.country.value,
-              indicator: obj.value,
-              id: obj.countryiso3code,
-              date: obj.date,
-            },
-          );
-        } else {
-          newEntities[0].push(
-            {
-              incomeGroup: obj.country.value,
-              indicator: obj.value,
-              id: obj.countryiso3code,
-              date: obj.date,
-            },
-          );
-        }
+        const arrIndex = (obj.country.value.includes('income')) ? 1 : 0;
+
+        newEntities[arrIndex].push(
+          {
+            incomeGroup: obj.country.value,
+            indicator: obj.value,
+            id: obj.countryiso3code,
+            date: obj.date,
+          },
+        );
       });
       return {
         ...state,
