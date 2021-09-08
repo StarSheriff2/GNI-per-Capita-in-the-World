@@ -3,6 +3,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
 import { fetchGniWorld } from '../redux/gniWorld/gniWorld';
 import RegionsList from './RegionsList';
+import IncomeGroupsList from './IncomesGroupList';
 
 const GniWorld = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ const GniWorld = () => {
   const loadingStatus = useSelector((state) => state.gniWorld.status);
 
   useEffect(() => {
-    if (gniWorld.length === 0) {
+    if (gniWorld[0].length === 0) {
       dispatch(fetchGniWorld());
     }
   }, []);
@@ -26,7 +27,8 @@ const GniWorld = () => {
 
   return (
     <div className="gni-world-container">
-      <RegionsList />
+      <RegionsList regions={gniWorld[0]} />
+      <IncomeGroupsList incomeGroups={gniWorld[1]} />
     </div>
   );
 };
