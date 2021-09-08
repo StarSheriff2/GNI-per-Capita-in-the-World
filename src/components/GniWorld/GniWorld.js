@@ -6,8 +6,10 @@ import GroupsList from '../GroupsList/GroupsList';
 // import IncomeGroupsList from '../IncomesGroupsList.js/IncomesGroupList';
 // import styles from './GniWorld.module.scss';
 
-const GniWorld = () => {
+const GniWorld = (props) => {
   const dispatch = useDispatch();
+
+  const { updatePath } = props;
 
   const gniWorld = useSelector((state) => state.gniWorld.entities, shallowEqual);
   const loadingStatus = useSelector((state) => state.gniWorld.status);
@@ -32,7 +34,7 @@ const GniWorld = () => {
 
   return (
     <div className="gni-world-container">
-      <GroupsList groups={gniWorld} category="region" />
+      <GroupsList groups={gniWorld} category="region" updatePath={updatePath} />
     </div>
   );
 };

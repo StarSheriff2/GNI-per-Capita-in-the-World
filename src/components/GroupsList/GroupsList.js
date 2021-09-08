@@ -1,19 +1,35 @@
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 // import styles from './GroupsList.module.scss';
 
 const GroupsList = (props) => {
-  const { groups, category } = props;
+  const { groups, category, updatePath } = props;
+
+  const path = (str) => str
+    .toLowerCase()
+    .replaceAll(' ', '-')
+    .replaceAll('&', 'and');
 
   return (
     <>
       {groups
         .filter((group) => group.category === category)
         .map((group) => (
-          <Card key={group.id} bg={'Primary'.toLowerCase()}>
-            <h2>{group.name}</h2>
-            <p>{group.indicator}</p>
-          </Card>
+          <NavLink
+            key={group.id}
+            to={`/groups/${path(group.name)}/`}
+            activeClassName="active-group"
+            onClick={() => updatePath({
+              path: path(`/groups/${path(group.name)}/`),
+              groudId: group.id,
+            })}
+          >
+            <Card bg={'Secondary'.toLowerCase()}>
+              <h2>{group.name}</h2>
+              <p>{group.indicator}</p>
+            </Card>
+          </NavLink>
         ))}
     </>
   );

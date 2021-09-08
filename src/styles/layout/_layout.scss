@@ -45,15 +45,8 @@ button {
   border-radius: 4px;
 }
 
-hr {
-  border: $primary-border-color 1px solid;
-  margin-bottom: 2.6rem;
-}
-
-.page-section {
-  max-width: 1100px;
-  margin: 2.8rem auto;
-  padding: 0 1rem;
+.active-group {
+  opacity: 1;
 }
 
 /*
