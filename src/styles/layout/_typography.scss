@@ -1,0 +1,24 @@
+@import '../abstracts/fonts';
+@import '../abstracts/mixins';
+@import '../abstracts/variables';
+
+h2 {
+  @include font(normal, normal, bold, 1.25rem/normal, $montserrat-font-family);
+
+  letter-spacing: -0.18px;
+  text-transform: uppercase;
+  color: $warm-grey;
+}
+
+h3 {
+  @include font(normal, normal, bold, 1.375rem/normal);
+
+  color: $black-two;
+  letter-spacing: -0.02px;
+}
+
+h4 {
+  @include font(normal, normal, 300, 0.875rem/normal);
+
+  color: $pale-blue;
+}

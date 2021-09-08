@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
-import { fetchGniWorld } from '../redux/gniWorld/gniWorld';
-import RegionsList from './RegionsList';
-import IncomeGroupsList from './IncomesGroupList';
+import { fetchGniWorld } from '../../redux/gniWorld/gniWorld';
+import GroupsList from '../GroupsList/GroupsList';
+// import IncomeGroupsList from '../IncomesGroupsList.js/IncomesGroupList';
+// import styles from './GniWorld.module.scss';
 
 const GniWorld = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const GniWorld = () => {
   const loadingStatus = useSelector((state) => state.gniWorld.status);
 
   useEffect(() => {
-    if (gniWorld[0].length === 0) {
+    if (gniWorld.length === 0) {
       dispatch(fetchGniWorld());
     }
   }, []);
@@ -25,10 +26,13 @@ const GniWorld = () => {
     );
   }
 
+  /* const changeCategory = (category) => {
+    return (category === 'region') ? 'income' : 'region';
+  } */
+
   return (
     <div className="gni-world-container">
-      <RegionsList regions={gniWorld[0]} />
-      <IncomeGroupsList incomeGroups={gniWorld[1]} />
+      <GroupsList groups={gniWorld} category="region" />
     </div>
   );
 };

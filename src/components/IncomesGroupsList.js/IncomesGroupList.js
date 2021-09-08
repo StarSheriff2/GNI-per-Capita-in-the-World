@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+/* import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 
 const IncomeGroupsList = (props) => {
@@ -25,3 +25,4 @@ IncomeGroupsList.propTypes = {
 };
 
 export default IncomeGroupsList;
+ */

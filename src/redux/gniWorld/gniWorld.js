@@ -10,7 +10,7 @@ const baseURL = 'http://api.worldbank.org/v2/country/Z4;Z7;ZJ;ZQ;XU;8S;ZG;XM;XN;
 
 const initialState = {
   status: 'idle',
-  entities: [[], []],
+  entities: [],
 };
 
 // Action Creators
@@ -49,24 +49,26 @@ const reducer = (state = initialState, action) => {
         status: 'starting',
       };
     case FETCH_SUCCEDED: {
-      const newEntities = [[], []];
+      const newEntities = [];
       action.payload.forEach((obj) => {
         if (obj.country.value.includes('income')) {
-          newEntities[1].push(
+          newEntities.push(
             {
               name: obj.country.value,
               indicator: obj.value,
               id: obj.country.id,
               date: obj.date,
+              category: 'income',
             },
           );
         } else {
-          newEntities[0].push(
+          newEntities.push(
             {
               name: obj.country.value,
               indicator: obj.value,
               id: obj.countryiso3code,
               date: obj.date,
+              category: 'region',
             },
           );
         }

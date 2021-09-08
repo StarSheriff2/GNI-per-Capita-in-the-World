@@ -3,7 +3,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import GniWorld from './components/GniWorld';
+import GniWorld from './components/GniWorld/GniWorld';
 
 // import Header from './components/Header';
 
