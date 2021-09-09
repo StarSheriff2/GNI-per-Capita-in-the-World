@@ -60,15 +60,15 @@ const reducer = (state = initialState, action) => {
         status: 'starting',
       };
     case FETCH_SUCCEDED: {
+      const { groupName, groupCountries } = action.payload;
       const newGroup = {};
-      newGroup[action.payload.groupName] = action.payload.groupCountries
-        .map((country) => (
-          {
-            name: country.country.value,
-            indicator: country.value,
-            date: country.date,
-          }
-        ));
+      newGroup[groupName] = groupCountries.map((country) => (
+        {
+          name: country.country.value,
+          indicator: country.value,
+          date: country.date,
+        }
+      ));
       return {
         ...state,
         entities: [
