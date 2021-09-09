@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
@@ -28,15 +29,15 @@ const GniWorld = (props) => {
     );
   }
 
-  /* const changeCategory = (category) => {
-    return (category === 'region') ? 'income' : 'region';
-  } */
-
   return (
     <div className="gni-world-container">
       <GroupsList groups={gniWorld} category="region" updatePath={updatePath} />
     </div>
   );
+};
+
+GniWorld.propTypes = {
+  updatePath: PropTypes.func.isRequired,
 };
 
 export default GniWorld;

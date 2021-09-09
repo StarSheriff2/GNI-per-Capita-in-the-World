@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { fetchDetails } from '../../redux/details/details';
 import { NavLink } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
+import { fetchDetails } from '../../redux/details/details';
 // import styles from './GroupsList.module.scss';
 
 const GroupsList = (props) => {
@@ -14,7 +14,7 @@ const GroupsList = (props) => {
 
   const addGroupCountries = (groupId) => {
     dispatch(fetchDetails(groupId));
-  }
+  };
 
   const isGroupCountry = (groupId) => groupId in groupCountries;
 
@@ -33,7 +33,7 @@ const GroupsList = (props) => {
             to={`/groups/${path(group.name)}/`}
             activeClassName="active-group"
             onClick={() => {
-              if (!isGroupCountry(group.id)) addGroupCountries(group.id)
+              if (!isGroupCountry(group.id)) addGroupCountries(group.id);
               updatePath({
                 path: path(`/groups/${path(group.name)}/`),
                 groupId: group.id,
@@ -57,6 +57,7 @@ GroupsList.propTypes = {
     id: PropTypes.string.isRequired,
   })).isRequired,
   category: PropTypes.string.isRequired,
+  updatePath: PropTypes.func.isRequired,
 };
 
 export default GroupsList;

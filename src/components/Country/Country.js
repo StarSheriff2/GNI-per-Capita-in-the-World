@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const Country = (props) => {
   const { country } = props;
@@ -14,8 +14,12 @@ const Country = (props) => {
   );
 };
 
-/* Country.propTypes = {
-
-} */
+Country.propTypes = {
+  country: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    indicator: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Country;
