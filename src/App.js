@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
+import Header from './components/Header/Header';
+import GniWorld from './components/GniWorld/GniWorld';
+import Details from './pages/Details';
 
-function App() {
+const App = () => {
+  const initialPath = {
+    path: '/',
+    groupId: '',
+    currentCategory: {
+      current: 'region',
+      other: 'income',
+    },
+  };
+
+  const [path, setPath] = useState(initialPath);
+
+  const updatePath = (newPath) => {
+    if (path !== newPath) {
+      setPath(() => newPath);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route exact path="/">
+              <GniWorld updatePath={updatePath} currentCategory={path.currentCategory} />
+            </Route>
+            <Route path={path.path}>
+              <Header />
+              <Details groupId={path.groupId} />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </>
   );
-}
+};
 
 export default App;

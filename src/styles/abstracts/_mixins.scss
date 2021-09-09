@@ -1,0 +1,13 @@
+@use '../abstracts/fonts';
+
+@mixin d-flex ($direction: row, $jc: flex-start, $ai: flex-start, $wrapping: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-wrap: $wrapping;
+}
+
+@mixin font ($style: normal, $variant: normal, $weight: normal, $size-height: 1rem/normal, $family: $roboto-slab-font-family) {
+  font: $style $variant $weight $size-height $family;
+}
