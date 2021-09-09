@@ -30,7 +30,6 @@ export const getGniWorldFailed = (payload) => ({
 
 export const fetchGniWorld = () => async (dispatch) => {
   dispatch(getGniWorldStarted());
-  await new Promise((resolve) => setTimeout(resolve, 1000));
   try {
     const response = await fetch(baseURL, {});
     const gniWorld = await response.json();

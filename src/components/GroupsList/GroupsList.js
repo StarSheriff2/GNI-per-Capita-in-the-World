@@ -13,7 +13,7 @@ const GroupsList = (props) => {
   const groupCountries = useSelector((state) => state.details.entities, shallowEqual);
 
   const addGroupCountries = (groupId) => {
-    dispatch(fetchDetails(groupId));
+    dispatch(fetchDetails(groupId, category));
   };
 
   const isGroupCountry = (groupId) => groupId in groupCountries;
@@ -37,6 +37,10 @@ const GroupsList = (props) => {
               updatePath({
                 path: path(`/groups/${path(group.name)}/`),
                 groupId: group.id,
+                currentCategory: {
+                  current: category,
+                  other: `${(category === 'region') ? 'income' : 'region'}`,
+                },
               });
             }}
           >

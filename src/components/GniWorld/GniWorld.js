@@ -1,19 +1,40 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
 import { fetchGniWorld } from '../../redux/gniWorld/gniWorld';
 import GroupsList from '../GroupsList/GroupsList';
+import Filter from '../Filter/Filter';
 // import IncomeGroupsList from '../IncomesGroupsList.js/IncomesGroupList';
 // import styles from './GniWorld.module.scss';
 
 const GniWorld = (props) => {
   const dispatch = useDispatch();
 
-  const { updatePath } = props;
+  const { currentCategory, updatePath } = props;
+  const { current, other } = currentCategory;
 
   const gniWorld = useSelector((state) => state.gniWorld.entities, shallowEqual);
   const loadingStatus = useSelector((state) => state.gniWorld.status);
+
+  const [categoryFilter, setCategoryFilter] = useState({
+    current,
+    other,
+  });
+
+  const changeCategoryFilter = () => {
+    if (categoryFilter.current === 'region') {
+      setCategoryFilter({
+        current: 'income',
+        other: 'region',
+      });
+    } else {
+      setCategoryFilter({
+        current: 'region',
+        other: 'income',
+      });
+    }
+  };
 
   useEffect(() => {
     if (gniWorld.length === 0) {
@@ -31,7 +52,11 @@ const GniWorld = (props) => {
 
   return (
     <div className="gni-world-container">
-      <GroupsList groups={gniWorld} category="region" updatePath={updatePath} />
+      <Filter
+        otherCategory={categoryFilter.other}
+        changeCategoryFilter={changeCategoryFilter}
+      />
+      <GroupsList groups={gniWorld} category={categoryFilter.current} updatePath={updatePath} />
     </div>
   );
 };

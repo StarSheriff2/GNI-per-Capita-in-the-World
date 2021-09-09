@@ -1,5 +1,5 @@
 // API Query Keywords
-// import incomeLevel from "../../filters/incomeLevel";
+import incomeLevel from '../../filters/incomeLevel';
 import regions from '../../filters/regions';
 
 // Actions
@@ -32,10 +32,12 @@ export const getDetailsFailed = (payload) => ({
   payload,
 });
 
-export const fetchDetails = (groupId) => async (dispatch) => {
+export const fetchDetails = (groupId, category) => async (dispatch) => {
   dispatch(getDetailsStarted());
-  const groupCountriesId = regions[groupId];
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  const groupCountriesId = (category === 'region') ? regions[groupId] : incomeLevel[groupId];
+  console.log('groupCountries: ', groupCountriesId);
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
+  console.log('APIQUery: ', `${baseURL + groupCountriesId}/indicator/NY.GNP.PCAP.CD?per_page=100&format=json&mrnev=1`);
   try {
     const response = await fetch(`${baseURL + groupCountriesId}/indicator/NY.GNP.PCAP.CD?per_page=100&format=json&mrnev=1`, {
       mode: 'cors',
