@@ -8,31 +8,17 @@ import Country from '../components/Country/Country';
 const Details = (props) => {
   const { groupId } = props;
 
-  // const [state, setState] = useState(null);
-
-  const dispatch = useDispatch();
-
-  const countries = useSelector((state) => state.details.entities, shallowEqual);
+  // const dispatch = useDispatch();
   const loadingStatus = useSelector((state) => state.details.status);
+  const groupCountries = useSelector((state) => state.details.entities, shallowEqual);
+  const countries = groupCountries[groupId];
 
-  const [id, setId] = useState(groupId);
-
-  // const [groupDetails, setGroupDetails] = useState(countries);
-
-  useEffect(() => {
-    // if (state !== groupId) {
-    // setState(() => groupId);
-    console.log('hi');
-    // }
-    // console.log('state is differente?', state !== groupId);
-    if (countries.length === 0) {
-      dispatch(fetchDetails(groupId));
-    }
-  }, []);
 
   /* useEffect(() => {
-    dispatch(fetchDetails(groupId));
-  }, [countries]); */
+    if (!(groupId in groups)) {
+      dispatch(fetchDetails(groupId));
+    }
+  }, []); */
 
   if (loadingStatus === 'starting') {
     return (
@@ -42,9 +28,7 @@ const Details = (props) => {
     );
   }
 
-  console.log('state: ', id);
-  console.log('groupId: ', groupId);
-  // setId('whatevs');
+  // console.log('countriesDetails: ', groupCountries[groupId]);
 
   return (
     <div className="details-container">

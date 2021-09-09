@@ -35,7 +35,7 @@ const App = () => {
             </Route>
             <Route path={path.path}>
               <Header />
-              <Details groupId={path.groupId} />
+              <Details groupId={path.groupId}/>
             </Route>
           </Switch>
         </div>

@@ -1,10 +1,22 @@
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { fetchDetails } from '../../redux/details/details';
 import { NavLink } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 // import styles from './GroupsList.module.scss';
 
 const GroupsList = (props) => {
   const { groups, category, updatePath } = props;
+
+  const dispatch = useDispatch();
+
+  const groupCountries = useSelector((state) => state.details.entities, shallowEqual);
+
+  const addGroupCountries = (groupId) => {
+    dispatch(fetchDetails(groupId));
+  }
+
+  const isGroupCountry = (groupId) => groupId in groupCountries;
 
   const path = (str) => str
     .toLowerCase()
@@ -20,10 +32,13 @@ const GroupsList = (props) => {
             key={group.id}
             to={`/groups/${path(group.name)}/`}
             activeClassName="active-group"
-            onClick={() => updatePath({
-              path: path(`/groups/${path(group.name)}/`),
-              groupId: group.id,
-            })}
+            onClick={() => {
+              if (!isGroupCountry(group.id)) addGroupCountries(group.id)
+              updatePath({
+                path: path(`/groups/${path(group.name)}/`),
+                groupId: group.id,
+              });
+            }}
           >
             <Card bg={'Secondary'.toLowerCase()}>
               <h2>{group.name}</h2>

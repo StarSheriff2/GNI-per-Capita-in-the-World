@@ -14,7 +14,7 @@ const baseURL = 'https://api.worldbank.org/v2/country/';
 
 const initialState = {
   status: 'idle',
-  entities: [],
+  entities: {},
 };
 
 // Action Creators
@@ -71,10 +71,10 @@ const reducer = (state = initialState, action) => {
       ));
       return {
         ...state,
-        entities: [
+        entities: {
           ...state.entities,
-          { ...newGroup },
-        ],
+          ...newGroup,
+        },
         status: 'idle',
       };
     }
