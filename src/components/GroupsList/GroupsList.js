@@ -22,7 +22,7 @@ const GroupsList = (props) => {
             activeClassName="active-group"
             onClick={() => updatePath({
               path: path(`/groups/${path(group.name)}/`),
-              groudId: group.id,
+              groupId: group.id,
             })}
           >
             <Card bg={'Secondary'.toLowerCase()}>

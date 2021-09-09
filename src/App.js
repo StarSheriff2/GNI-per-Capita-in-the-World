@@ -14,20 +14,16 @@ import Details from './pages/Details';
 const App = () => {
   const initialPath = {
     path: '/',
-    groudId: '',
+    groupId: '',
   };
-
-  // const location = useLocation();
 
   const [path, setPath] = useState(initialPath);
 
-  /* useEffect(() => {
-    path =
-  }, []) */
-
-  const updatePath = (newPath) => setPath(() => newPath);
-
-  console.log('path: ', path);
+  const updatePath = (newPath) => {
+    if (path !== newPath) {
+      setPath(() => newPath);
+    }
+  };
 
   return (
     <>
@@ -39,7 +35,7 @@ const App = () => {
             </Route>
             <Route path={path.path}>
               <Header />
-              <Details group={path.groudId} updatePath={updatePath} />
+              <Details groupId={path.groupId} />
             </Route>
           </Switch>
         </div>
