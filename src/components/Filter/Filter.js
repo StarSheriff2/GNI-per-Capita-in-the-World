@@ -14,6 +14,7 @@ const Filter = (props) => {
 
 Filter.propTypes = {
   changeCategoryFilter: PropTypes.func.isRequired,
+  otherCategory: PropTypes.string.isRequired,
 };
 
 export default Filter;

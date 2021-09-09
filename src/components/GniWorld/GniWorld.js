@@ -5,7 +5,6 @@ import { Spinner } from 'react-bootstrap';
 import { fetchGniWorld } from '../../redux/gniWorld/gniWorld';
 import GroupsList from '../GroupsList/GroupsList';
 import Filter from '../Filter/Filter';
-// import IncomeGroupsList from '../IncomesGroupsList.js/IncomesGroupList';
 // import styles from './GniWorld.module.scss';
 
 const GniWorld = (props) => {
@@ -22,19 +21,10 @@ const GniWorld = (props) => {
     other,
   });
 
-  const changeCategoryFilter = () => {
-    if (categoryFilter.current === 'region') {
-      setCategoryFilter({
-        current: 'income',
-        other: 'region',
-      });
-    } else {
-      setCategoryFilter({
-        current: 'region',
-        other: 'income',
-      });
-    }
-  };
+  const changeCategoryFilter = () => setCategoryFilter((actualCategory) => ({
+    current: actualCategory.other,
+    other: actualCategory.current,
+  }));
 
   useEffect(() => {
     if (gniWorld.length === 0) {
@@ -63,6 +53,10 @@ const GniWorld = (props) => {
 
 GniWorld.propTypes = {
   updatePath: PropTypes.func.isRequired,
+  currentCategory: PropTypes.shape({
+    current: PropTypes.string.isRequired,
+    other: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default GniWorld;
