@@ -70,6 +70,7 @@ const GroupsList = (props) => {
     <>
       {groups
         .filter((group) => group.category === current)
+        .sort((a, b) => a.indicator < b.indicator)
         .map((group) => (
           <NavLink
             className={`${styles.groupContainer}`}
