@@ -1,3 +1,11 @@
-.cardBg {
-  background-color: pink;
+@import '../../styles/abstracts/variables';
+
+.regionIcon {
+  font-size: 7rem;
+  color: $pink-medium;
+}
+
+.incomeLevelIcon {
+  font-size: 7rem;
+  color: $pink-medium;
 }

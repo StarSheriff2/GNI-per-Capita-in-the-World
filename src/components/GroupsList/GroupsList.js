@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
 import { fetchDetails } from '../../redux/details/details';
-// import styles from './GroupsList.module.scss';
+import styles from './GroupsList.module.scss';
 
 const GroupsList = (props) => {
   const { groups, category, updatePath } = props;
@@ -23,6 +22,49 @@ const GroupsList = (props) => {
     .toLowerCase()
     .replaceAll(' ', '-')
     .replaceAll('&', 'and');
+
+  const groupIcon = (groupName) => {
+    if (groupName.includes('Europe')) {
+      return (<i className={`fas fa-globe-europe ${styles.regionIcon}`} />);
+    }
+    if (groupName.includes('Asia')) {
+      return (<i className={`fas fa-globe-asia ${styles.regionIcon}`} />);
+    }
+    if (groupName.includes('Africa')) {
+      return (<i className={`fas fa-globe-africa ${styles.regionIcon}`} />);
+    }
+    if (groupName.includes('America')) {
+      return (<i className={`fas fa-globe-americas ${styles.regionIcon}`} />);
+    }
+    if (groupName.includes('High income')) {
+      return (
+        <>
+          <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+          <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+          <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+          <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+        </>
+      );
+    }
+    if (groupName.includes('Low income')) {
+      return (<i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />);
+    }
+    if (groupName.includes('Lower middle income')) {
+      return (
+        <>
+          <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+          <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+        </>
+      );
+    }
+    return (
+      <>
+        <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+        <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+        <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+      </>
+    );
+  };
 
   return (
     <>
@@ -45,10 +87,11 @@ const GroupsList = (props) => {
               });
             }}
           >
-            <Card bg={'Secondary'.toLowerCase()}>
+            <div>
+              {groupIcon(group.name)}
               <h2>{group.name}</h2>
               <p>{group.indicator}</p>
-            </Card>
+            </div>
           </NavLink>
         ))}
     </>
