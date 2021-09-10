@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { Spinner } from 'react-bootstrap';
 import { fetchGniWorld } from '../../redux/gniWorld/gniWorld';
 import GroupsList from '../GroupsList/GroupsList';
 import Filter from '../Filter/Filter';
+import LoadAnimation from '../LoadAnimation/LoadAnimation';
 // import styles from './GniWorld.module.scss';
 
 const GniWorld = (props) => {
@@ -34,15 +34,14 @@ const GniWorld = (props) => {
 
   if (loadingStatus === 'starting') {
     return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <LoadAnimation />
     );
   }
 
   return (
     <div className="gni-world-container">
       <Filter
+        currentCategory={categoryFilter.current}
         otherCategory={categoryFilter.other}
         changeCategoryFilter={changeCategoryFilter}
       />

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
-import { Spinner } from 'react-bootstrap';
+import LoadAnimation from '../components/LoadAnimation/LoadAnimation';
 import Country from '../components/Country/Country';
 
 const Details = (props) => {
@@ -13,9 +13,7 @@ const Details = (props) => {
 
   if (loadingStatus === 'starting') {
     return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <LoadAnimation />
     );
   }
 

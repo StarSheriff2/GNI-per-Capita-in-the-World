@@ -23,11 +23,12 @@ const Header = (props) => {
   );
 
   let navigationPath = (
-    <p>
+    <p className={`${styles.navigationPath}`}>
       {path
         .replace(/groups\//, '')
         .replace(/\//g, '')
-        .replace(/-/g, ' ')}
+        .replace(/-/g, ' ')
+        .replace(/and/g, '&')}
     </p>
   );
 
@@ -36,7 +37,7 @@ const Header = (props) => {
       <div className="d-none" />
     );
     navigationPath = (
-      <p>GNI per Capita</p>
+      <p className={`${styles.homePath}`}>GNI per Capita</p>
     );
   }
 
