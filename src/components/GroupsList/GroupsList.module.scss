@@ -1,11 +1,39 @@
 @import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+.groupContainer {
+  width: 50vw;
+  display: block;
+}
+
+.groupContainer:nth-child(4n+2),
+.groupContainer:nth-child(3n),
+.groupContainer:nth-child(7n) {
+  // @include d-flex(column, space-between, flex-end);
+
+  background-color: $pink-medium-dark;
+}
+
+.groupDivContainer {
+  @include d-flex(column, space-between, flex-end);
+
+  height: 27vh;
+  text-align: end;
+  padding: 0.8rem 0.8rem 1.2rem 1.2rem;
+}
 
 .regionIcon {
-  font-size: 7rem;
-  color: $pink-medium;
+  align-self: center;
+  font-size: 10rem;
+  color: $pink-dark;
+  padding: 1rem;
 }
 
 .incomeLevelIcon {
   font-size: 7rem;
   color: $pink-medium;
+}
+
+.groupName {
+  font-weight: 700;
 }

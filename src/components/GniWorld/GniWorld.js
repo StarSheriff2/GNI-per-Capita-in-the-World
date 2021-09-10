@@ -5,6 +5,7 @@ import { fetchGniWorld } from '../../redux/gniWorld/gniWorld';
 import GroupsList from '../GroupsList/GroupsList';
 import Filter from '../Filter/Filter';
 import LoadAnimation from '../LoadAnimation/LoadAnimation';
+import styles from './GniWorld.module.scss';
 
 const GniWorld = (props) => {
   const dispatch = useDispatch();
@@ -44,7 +45,9 @@ const GniWorld = (props) => {
         otherCategory={categoryFilter.other}
         changeCategoryFilter={changeCategoryFilter}
       />
-      <GroupsList groups={gniWorld} category={categoryFilter} updatePath={updatePath} />
+      <div className={`${styles.groupListContainer}`}>
+        <GroupsList groups={gniWorld} category={categoryFilter} updatePath={updatePath} />
+      </div>
     </section>
   );
 };

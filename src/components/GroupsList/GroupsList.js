@@ -72,6 +72,7 @@ const GroupsList = (props) => {
         .filter((group) => group.category === current)
         .map((group) => (
           <NavLink
+            className={`${styles.groupContainer}`}
             key={group.id}
             to={`/groups/${path(group.name)}/`}
             activeClassName="active-group"
@@ -87,10 +88,12 @@ const GroupsList = (props) => {
               });
             }}
           >
-            <div>
+            <div className={`${styles.groupDivContainer}`}>
               {groupIcon(group.name)}
-              <h2>{group.name}</h2>
-              <p>{group.indicator}</p>
+              <div>
+                <h3 className={`${styles.groupName}`}>{group.name}</h3>
+                <p>{`$${Math.trunc(group.indicator).toLocaleString()}`}</p>
+              </div>
             </div>
           </NavLink>
         ))}

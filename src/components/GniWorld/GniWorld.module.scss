@@ -1,3 +1,5 @@
-.gni-world-container {
-  background-color: orange;
+@import '../../styles/abstracts/mixins';
+
+.groupListContainer {
+  @include d-flex(row, flex-start, center, wrap);
 }

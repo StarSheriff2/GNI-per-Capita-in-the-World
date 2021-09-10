@@ -18,7 +18,7 @@ const Filter = (props) => {
           {icon}
         </div>
         <div className={`${styles.filterController}`}>
-          <p className={`${styles.currentCategory}`}>{(currentCategory === 'region') ? 'REGIONS' : 'INCOME LEVELS'}</p>
+          <h2 className={`${styles.currentCategory}`}>{(currentCategory === 'region') ? 'REGIONS' : 'INCOME LEVELS'}</h2>
           <p className={`${styles.filterLabel}`}>Filter Category: </p>
           <button
             className={`${styles.filterButton}`}
