@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import styles from './Header.module.scss';
 
 const Header = (props) => {
   const { currentPath, updatePath } = props;
@@ -8,6 +9,7 @@ const Header = (props) => {
 
   let backArrow = (
     <NavLink
+      className={styles.backArrow}
       to="/"
       onClick={() => {
         updatePath({
@@ -39,10 +41,10 @@ const Header = (props) => {
   }
 
   return (
-    <div>
+    <header className={`d-flex ${styles.header}`}>
       {backArrow}
       {navigationPath}
-    </div>
+    </header>
   );
 };
 
