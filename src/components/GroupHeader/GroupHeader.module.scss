@@ -4,7 +4,7 @@
 .filterContainer {
   @include d-flex(row, center, center);
 
-  padding: 1rem;
+  padding: 1.6rem;
   background-color: $pink-super-light;
 }
 
@@ -14,24 +14,30 @@
   align-items: center;
 }
 
-.worldIcon {
+.regionIcon {
   font-size: 11rem;
   color: $pink-dark;
 }
 
+.incomeLevelIcon {
+  font-size: 6rem;
+  color: $pink-dark;
+}
+
 .filterController {
-  @include d-flex(column, center, flex-start);
+  @include d-flex(column, center, flex-end);
 
   width: 100%;
   padding-left: 2rem;
+  text-align: right;
 }
 
-.currentCategory {
-  font-size: 2.4rem;
-  margin-bottom: 1.5rem;
+.currentGroup {
+  font-size: 2.2rem;
+  text-transform: uppercase;
 }
 
-.filterLabel {
+.groupIndicator {
   margin-bottom: 0.5rem;
 }
 

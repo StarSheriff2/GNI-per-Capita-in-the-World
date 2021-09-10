@@ -4,7 +4,7 @@
 .filterContainer {
   @include d-flex(row, center, center);
 
-  padding: 1rem;
+  padding: 1.6rem;
   background-color: $pink-super-light;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .currentCategory {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   margin-bottom: 1.5rem;
 }
 

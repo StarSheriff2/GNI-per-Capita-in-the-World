@@ -24,11 +24,7 @@ const Header = (props) => {
 
   let navigationPath = (
     <p className={`${styles.navigationPath}`}>
-      {path
-        .replace(/groups\//, '')
-        .replace(/\//g, '')
-        .replace(/-/g, ' ')
-        .replace(/and/g, '&')}
+      gni per capita per country
     </p>
   );
 
@@ -37,12 +33,12 @@ const Header = (props) => {
       <div className="d-none" />
     );
     navigationPath = (
-      <p className={`${styles.homePath}`}>GNI per Capita in the World</p>
+      <p className={`${styles.homePath}`}>gni per capita in the world</p>
     );
   }
 
   return (
-    <header id="header-id" className={`d-flex ${styles.header}`}>
+    <header className={`d-flex ${styles.header}`}>
       {backArrow}
       {navigationPath}
     </header>

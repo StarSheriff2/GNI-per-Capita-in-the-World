@@ -6,8 +6,7 @@ import Country from '../components/Country/Country';
 import GroupHeader from '../components/GroupHeader/GroupHeader';
 
 const Details = (props) => {
-  const { groupId } = props;
-  const currentGroup = document.querySelector('#header-id');
+  const { currentPath, groupId } = props;
 
   const loadingStatus = useSelector((state) => state.details.status);
   const groupCountries = useSelector((state) => state.details.entities, shallowEqual);
@@ -22,7 +21,8 @@ const Details = (props) => {
   return (
     <section>
       <GroupHeader
-        currentGroup={(currentGroup) ? currentGroup.textContent : null}
+        currentPath={currentPath}
+        groupId={groupId}
       />
       <div className="details-container">
         {countries.map((country) => (
@@ -37,6 +37,7 @@ const Details = (props) => {
 
 Details.propTypes = {
   groupId: PropTypes.string.isRequired,
+  currentPath: PropTypes.string.isRequired,
 };
 
 export default Details;

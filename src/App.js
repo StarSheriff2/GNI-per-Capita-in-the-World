@@ -36,7 +36,7 @@ const App = () => {
               <GniWorld updatePath={updatePath} currentCategory={path.currentCategory} />
             </Route>
             <Route path={path.path}>
-              <Details groupId={path.groupId} />
+              <Details groupId={path.groupId} currentPath={path.path} />
             </Route>
           </Switch>
         </div>
