@@ -29,7 +29,9 @@ const Filter = (props) => {
           </button>
         </div>
       </div>
-      <p className={`${styles.indicatorDescription}`}>{`indicators by ${currentCategory}`}</p>
+      <p className={`${styles.indicatorDescription}`}>
+        {`${(currentCategory === 'region') ? 'indicators by country region' : 'indicators by country income-level'}`}
+      </p>
     </>
   );
 };

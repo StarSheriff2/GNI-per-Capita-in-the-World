@@ -17,6 +17,7 @@
 .groupDivContainer {
   @include d-flex(column, space-between, flex-end);
 
+  position: relative;
   height: 27vh;
   text-align: end;
   padding: 0.8rem 0.8rem 1.2rem 1.2rem;
@@ -37,6 +38,12 @@
 .incomeLevelIcon {
   font-size: 7rem;
   color: $pink-medium;
+}
+
+.arrowIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
 
 .groupName {

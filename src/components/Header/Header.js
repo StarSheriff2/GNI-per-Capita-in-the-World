@@ -37,12 +37,12 @@ const Header = (props) => {
       <div className="d-none" />
     );
     navigationPath = (
-      <p className={`${styles.homePath}`}>GNI per Capita</p>
+      <p className={`${styles.homePath}`}>GNI per Capita in the World</p>
     );
   }
 
   return (
-    <header className={`d-flex ${styles.header}`}>
+    <header id="header-id" className={`d-flex ${styles.header}`}>
       {backArrow}
       {navigationPath}
     </header>
