@@ -38,31 +38,31 @@ const GroupsList = (props) => {
     }
     if (groupName.includes('High income')) {
       return (
-        <>
+        <div className={`${styles.incomeLevelIconDiv}`}>
           <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
           <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
           <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
           <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
-        </>
+        </div>
       );
     }
     if (groupName.includes('Low income')) {
-      return (<i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />);
+      return (<div className={`${styles.incomeLevelIconDiv}`}><i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} /></div>);
     }
     if (groupName.includes('Lower middle income')) {
       return (
-        <>
+        <div className={`${styles.incomeLevelIconDiv}`}>
           <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
           <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
-        </>
+        </div>
       );
     }
     return (
-      <>
+      <div className={`${styles.incomeLevelIconDiv}`}>
         <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
         <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
         <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
-      </>
+      </div>
     );
   };
 
