@@ -5,10 +5,16 @@ import styles from './Filter.module.scss';
 const Filter = (props) => {
   const { currentCategory, otherCategory, changeCategoryFilter } = props;
 
+  let icon = (<i className={`fas fa-globe ${styles.worldIcon}`} />);
+
+  if (currentCategory !== 'region') {
+    icon = (<i className={`fas fa-dollar-sign ${styles.worldIcon}`} />);
+  }
+
   return (
     <div className={`${styles.filterContainer}`}>
       <div className={`d-flex ${styles.iconContainer}`}>
-        <i className={`fas fa-globe ${styles.worldIcon}`} />
+        {icon}
       </div>
       <div className={`${styles.filterController}`}>
         <p className={`${styles.currentCategory}`}>{(currentCategory === 'region') ? 'REGIONS' : 'INCOME LEVELS'}</p>
