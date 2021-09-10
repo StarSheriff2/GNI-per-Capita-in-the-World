@@ -20,15 +20,28 @@ const Header = (props) => {
     </NavLink>
   );
 
+  let navigationPath = (
+    <p>
+      {path
+        .replace(/groups\//, '')
+        .replace(/\//g, '')
+        .replace(/-/g, ' ')}
+    </p>
+  );
+
   if (path === '/') {
     backArrow = (
       <div className="d-none" />
+    );
+    navigationPath = (
+      <p>GNI per Capita</p>
     );
   }
 
   return (
     <div>
       {backArrow}
+      {navigationPath}
     </div>
   );
 };
