@@ -1,4 +1,4 @@
-@use '../abstracts/fonts';
+@use './fonts';
 
 @mixin d-flex ($direction: row, $jc: flex-start, $ai: flex-start, $wrapping: nowrap) {
   display: flex;

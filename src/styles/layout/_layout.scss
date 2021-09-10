@@ -17,15 +17,18 @@ li {
 
 html {
   box-sizing: border-box;
-  font-size: 100%;
+  font-size: 62.5%;
 }
 
 body {
+  font-family: $primary-font;
   font-size: 1.6rem;
-  color: rgb(0, 0, 0);
-  background-color: $bg-color;
+  color: $white;
+  background-color: $pink-light;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  height: 100vh;
 }
 
 a,
@@ -40,9 +43,9 @@ a:hover {
 button {
   border: none;
   cursor: pointer;
-  background-color: $primary;
   color: $white;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .active-group {

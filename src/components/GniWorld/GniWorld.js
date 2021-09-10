@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { Spinner } from 'react-bootstrap';
 import { fetchGniWorld } from '../../redux/gniWorld/gniWorld';
 import GroupsList from '../GroupsList/GroupsList';
 import Filter from '../Filter/Filter';
-// import styles from './GniWorld.module.scss';
+import LoadAnimation from '../LoadAnimation/LoadAnimation';
+import styles from './GniWorld.module.scss';
 
 const GniWorld = (props) => {
   const dispatch = useDispatch();
@@ -34,20 +34,23 @@ const GniWorld = (props) => {
 
   if (loadingStatus === 'starting') {
     return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <section className={`${styles.spinnerContainer}`}>
+        <LoadAnimation />
+      </section>
     );
   }
 
   return (
-    <div className="gni-world-container">
+    <section>
       <Filter
+        currentCategory={categoryFilter.current}
         otherCategory={categoryFilter.other}
         changeCategoryFilter={changeCategoryFilter}
       />
-      <GroupsList groups={gniWorld} category={categoryFilter.current} updatePath={updatePath} />
-    </div>
+      <div className={`${styles.groupListContainer}`}>
+        <GroupsList groups={gniWorld} category={categoryFilter} updatePath={updatePath} />
+      </div>
+    </section>
   );
 };
 

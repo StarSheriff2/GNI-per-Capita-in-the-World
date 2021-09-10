@@ -1,19 +1,19 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
 import { fetchDetails } from '../../redux/details/details';
-// import styles from './GroupsList.module.scss';
+import styles from './GroupsList.module.scss';
 
 const GroupsList = (props) => {
   const { groups, category, updatePath } = props;
+  const { current, other } = category;
 
   const dispatch = useDispatch();
 
   const groupCountries = useSelector((state) => state.details.entities, shallowEqual);
 
   const addGroupCountries = (groupId) => {
-    dispatch(fetchDetails(groupId, category));
+    dispatch(fetchDetails(groupId, current));
   };
 
   const isGroupCountry = (groupId) => groupId in groupCountries;
@@ -23,12 +23,57 @@ const GroupsList = (props) => {
     .replaceAll(' ', '-')
     .replaceAll('&', 'and');
 
+  const groupIcon = (groupName) => {
+    if (groupName.includes('Europe')) {
+      return (<i className={`fas fa-globe-europe ${styles.regionIcon}`} />);
+    }
+    if (groupName.includes('Asia')) {
+      return (<i className={`fas fa-globe-asia ${styles.regionIcon}`} />);
+    }
+    if (groupName.includes('Africa')) {
+      return (<i className={`fas fa-globe-africa ${styles.regionIcon}`} />);
+    }
+    if (groupName.includes('America')) {
+      return (<i className={`fas fa-globe-americas ${styles.regionIcon}`} />);
+    }
+    if (groupName.includes('High income')) {
+      return (
+        <div className={`${styles.incomeLevelIconDiv}`}>
+          <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+          <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+          <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+          <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+        </div>
+      );
+    }
+    if (groupName.includes('Low income')) {
+      return (<div className={`${styles.incomeLevelIconDiv}`}><i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} /></div>);
+    }
+    if (groupName.includes('Lower middle income')) {
+      return (
+        <div className={`${styles.incomeLevelIconDiv}`}>
+          <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+          <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+        </div>
+      );
+    }
+    return (
+      <div className={`${styles.incomeLevelIconDiv}`}>
+        <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+        <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+        <i className={`fas fa-dollar-sign ${styles.incomeLevelIcon}`} />
+      </div>
+    );
+  };
+
   return (
     <>
       {groups
-        .filter((group) => group.category === category)
+        .filter((group) => group.category === current)
+        .sort((a, b) => a.indicator < b.indicator)
         .map((group) => (
           <NavLink
+            className={`${styles.groupContainer}`}
             key={group.id}
             to={`/groups/${path(group.name)}/`}
             activeClassName="active-group"
@@ -38,16 +83,20 @@ const GroupsList = (props) => {
                 path: path(`/groups/${path(group.name)}/`),
                 groupId: group.id,
                 currentCategory: {
-                  current: category,
-                  other: `${(category === 'region') ? 'income' : 'region'}`,
+                  current,
+                  other,
                 },
               });
             }}
           >
-            <Card bg={'Secondary'.toLowerCase()}>
-              <h2>{group.name}</h2>
-              <p>{group.indicator}</p>
-            </Card>
+            <div className={`${styles.groupDivContainer}`}>
+              {groupIcon(group.name)}
+              <i className={`far fa-arrow-alt-circle-right ${styles.arrowIcon}`} />
+              <div>
+                <h3 className={`${styles.groupName}`}>{group.name}</h3>
+                <p>{`$ ${Math.trunc(group.indicator).toLocaleString()}`}</p>
+              </div>
+            </div>
           </NavLink>
         ))}
     </>
@@ -60,7 +109,10 @@ GroupsList.propTypes = {
     indicator: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
   })).isRequired,
-  category: PropTypes.string.isRequired,
+  category: PropTypes.shape({
+    current: PropTypes.string.isRequired,
+    other: PropTypes.string.isRequired,
+  }).isRequired,
   updatePath: PropTypes.func.isRequired,
 };
 

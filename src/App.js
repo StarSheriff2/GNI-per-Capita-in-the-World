@@ -30,13 +30,13 @@ const App = () => {
     <>
       <Router>
         <div className="App">
+          <Header currentPath={path} updatePath={updatePath} />
           <Switch>
             <Route exact path="/">
               <GniWorld updatePath={updatePath} currentCategory={path.currentCategory} />
             </Route>
             <Route path={path.path}>
-              <Header />
-              <Details groupId={path.groupId} />
+              <Details groupId={path.groupId} currentPath={path.path} />
             </Route>
           </Switch>
         </div>

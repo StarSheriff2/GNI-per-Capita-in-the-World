@@ -1,0 +1,48 @@
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/variables';
+
+.filterContainer {
+  @include d-flex(row, center, center);
+
+  padding: 1.6rem;
+  background-color: $pink-super-light;
+}
+
+.iconContainer {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.regionIcon {
+  font-size: 11rem;
+  color: $pink-dark;
+}
+
+.incomeLevelIcon {
+  font-size: 6rem;
+  color: $pink-dark;
+}
+
+.filterController {
+  @include d-flex(column, center, flex-end);
+
+  width: 100%;
+  padding-left: 2rem;
+  text-align: right;
+}
+
+.currentGroup {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.groupIndicator {
+  margin-bottom: 0.5rem;
+}
+
+.indicatorDescription {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  padding: 0.5rem 2.6rem;
+}

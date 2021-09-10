@@ -1,0 +1,50 @@
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+.groupContainer {
+  width: 50vw;
+  display: block;
+  background-color: $pink-light-dark;
+}
+
+.groupContainer:nth-child(4n+2),
+.groupContainer:nth-child(3n),
+.groupContainer:nth-child(7n) {
+  background-color: $pink-medium-dark;
+}
+
+.groupDivContainer {
+  @include d-flex(column, space-between, flex-end);
+
+  position: relative;
+  height: 27vh;
+  text-align: end;
+  padding: 0.8rem 0.8rem 1.2rem 1.2rem;
+}
+
+.regionIcon {
+  align-self: center;
+  font-size: 10rem;
+  color: $pink-dark;
+  padding: 1rem;
+}
+
+.incomeLevelIconDiv {
+  padding-top: 2rem;
+  align-self: center;
+}
+
+.incomeLevelIcon {
+  font-size: 7rem;
+  color: $pink-medium;
+}
+
+.arrowIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.groupName {
+  font-weight: 700;
+}
