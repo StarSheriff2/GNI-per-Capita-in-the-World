@@ -1,11 +1,15 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Spinner } from 'react-bootstrap';
+
+const sizing = {
+  width: '14rem',
+  height: '14rem',
+};
 
 const LoadAnimation = () => (
-  <Spinner animation="border" role="status">
-    <span className="visually-hidden">Loading...</span>
-  </Spinner>
+  <div className="spinner-border" role="status" style={sizing}>
+    <span className="sr-only">Loading...</span>
+  </div>
 );
 
 export default LoadAnimation;

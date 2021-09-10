@@ -1,9 +1,17 @@
 @import '../styles/abstracts/variables';
 @import '../styles/abstracts/mixins';
 
-.countryWrapper {
-  // @include d-flex(row, center, center);
+.spinnerContainer {
+  @include d-flex(row, center, center);
 
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.countryWrapper {
   background-color: $pink-light-dark;
 }
 

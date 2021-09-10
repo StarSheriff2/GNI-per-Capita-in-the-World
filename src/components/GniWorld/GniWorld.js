@@ -34,7 +34,9 @@ const GniWorld = (props) => {
 
   if (loadingStatus === 'starting') {
     return (
-      <LoadAnimation />
+      <section className={`${styles.spinnerContainer}`}>
+        <LoadAnimation />
+      </section>
     );
   }
 

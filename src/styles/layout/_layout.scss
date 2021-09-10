@@ -27,6 +27,8 @@ body {
   background-color: $pink-light;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  height: 100vh;
 }
 
 a,
