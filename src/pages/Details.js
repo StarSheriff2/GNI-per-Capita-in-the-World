@@ -26,11 +26,13 @@ const Details = (props) => {
         groupId={groupId}
       />
       <div className="details-container">
-        {countries.map((country) => (
-          <li key={country.name} className={`${styles.countryWrapper}`}>
-            <Country country={country} />
-          </li>
-        ))}
+        {countries
+          .sort((a, b) => a.indicator < b.indicator)
+          .map((country) => (
+            <li key={country.name} className={`${styles.countryWrapper}`}>
+              <Country country={country} />
+            </li>
+          ))}
       </div>
     </section>
   );
