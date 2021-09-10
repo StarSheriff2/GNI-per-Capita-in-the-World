@@ -71,7 +71,7 @@ const GroupHeader = (props) => {
           <p className={`${styles.groupIndicator}`}>{`$${Math.trunc(currentGroup[0].indicator).toLocaleString()}`}</p>
         </div>
       </div>
-      <p className={`${styles.indicatorDescription}`}>region breakdown</p>
+      <p className={`${styles.indicatorDescription}`}>country breakdown</p>
     </>
   );
 };

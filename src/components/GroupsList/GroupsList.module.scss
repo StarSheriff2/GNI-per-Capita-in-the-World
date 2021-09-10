@@ -4,13 +4,12 @@
 .groupContainer {
   width: 50vw;
   display: block;
+  background-color: $pink-light-dark;
 }
 
 .groupContainer:nth-child(4n+2),
 .groupContainer:nth-child(3n),
 .groupContainer:nth-child(7n) {
-  // @include d-flex(column, space-between, flex-end);
-
   background-color: $pink-medium-dark;
 }
 
