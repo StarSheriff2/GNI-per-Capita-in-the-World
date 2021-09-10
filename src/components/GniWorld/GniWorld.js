@@ -46,7 +46,7 @@ const GniWorld = (props) => {
         otherCategory={categoryFilter.other}
         changeCategoryFilter={changeCategoryFilter}
       />
-      <GroupsList groups={gniWorld} category={categoryFilter.current} updatePath={updatePath} />
+      <GroupsList groups={gniWorld} category={categoryFilter} updatePath={updatePath} />
     </div>
   );
 };

@@ -7,13 +7,14 @@ import { fetchDetails } from '../../redux/details/details';
 
 const GroupsList = (props) => {
   const { groups, category, updatePath } = props;
+  const { current, other } = category;
 
   const dispatch = useDispatch();
 
   const groupCountries = useSelector((state) => state.details.entities, shallowEqual);
 
   const addGroupCountries = (groupId) => {
-    dispatch(fetchDetails(groupId, category));
+    dispatch(fetchDetails(groupId, current));
   };
 
   const isGroupCountry = (groupId) => groupId in groupCountries;
@@ -26,7 +27,7 @@ const GroupsList = (props) => {
   return (
     <>
       {groups
-        .filter((group) => group.category === category)
+        .filter((group) => group.category === current)
         .map((group) => (
           <NavLink
             key={group.id}
@@ -38,8 +39,8 @@ const GroupsList = (props) => {
                 path: path(`/groups/${path(group.name)}/`),
                 groupId: group.id,
                 currentCategory: {
-                  current: category,
-                  other: `${(category === 'region') ? 'income' : 'region'}`,
+                  current,
+                  other,
                 },
               });
             }}
@@ -60,7 +61,10 @@ GroupsList.propTypes = {
     indicator: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
   })).isRequired,
-  category: PropTypes.string.isRequired,
+  category: PropTypes.shape({
+    current: PropTypes.string.isRequired,
+    other: PropTypes.string.isRequired,
+  }).isRequired,
   updatePath: PropTypes.func.isRequired,
 };
 
