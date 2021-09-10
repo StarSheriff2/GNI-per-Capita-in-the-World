@@ -35,7 +35,7 @@ export const getDetailsFailed = (payload) => ({
 export const fetchDetails = (groupId, category) => async (dispatch) => {
   dispatch(getDetailsStarted());
   const groupCountriesId = (category === 'region') ? regions[groupId] : incomeLevel[groupId];
-  // await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 250));
   try {
     const response = await fetch(`${baseURL + groupCountriesId}/indicator/NY.GNP.PCAP.CD?per_page=100&format=json&mrnev=1`, {
       mode: 'cors',
