@@ -93,7 +93,7 @@ const GroupsList = (props) => {
               <i className={`far fa-arrow-alt-circle-right ${styles.arrowIcon}`} />
               <div>
                 <h3 className={`${styles.groupName}`}>{group.name}</h3>
-                <p>{`$${Math.trunc(group.indicator).toLocaleString()}`}</p>
+                <p>{`$ ${Math.trunc(group.indicator).toLocaleString()}`}</p>
               </div>
             </div>
           </NavLink>

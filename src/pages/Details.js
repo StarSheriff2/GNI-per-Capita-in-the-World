@@ -4,6 +4,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 import LoadAnimation from '../components/LoadAnimation/LoadAnimation';
 import Country from '../components/Country/Country';
 import GroupHeader from '../components/GroupHeader/GroupHeader';
+import styles from './Details.module.scss';
 
 const Details = (props) => {
   const { currentPath, groupId } = props;
@@ -26,7 +27,7 @@ const Details = (props) => {
       />
       <div className="details-container">
         {countries.map((country) => (
-          <li key={country.name}>
+          <li key={country.name} className={`${styles.countryWrapper}`}>
             <Country country={country} />
           </li>
         ))}

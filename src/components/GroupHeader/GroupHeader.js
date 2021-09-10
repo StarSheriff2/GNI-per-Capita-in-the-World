@@ -68,7 +68,7 @@ const GroupHeader = (props) => {
         </div>
         <div className={`${styles.filterController}`}>
           <h2 className={`${styles.currentGroup}`}>{extractGroupName}</h2>
-          <p className={`${styles.groupIndicator}`}>{`$${Math.trunc(currentGroup[0].indicator).toLocaleString()}`}</p>
+          <p className={`${styles.groupIndicator}`}>{`$ ${(currentGroup.length !== 0) ? Math.trunc(currentGroup[0].indicator).toLocaleString() : 0}`}</p>
         </div>
       </div>
       <p className={`${styles.indicatorDescription}`}>country breakdown</p>
