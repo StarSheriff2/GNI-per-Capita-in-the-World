@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './styles/reset.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/index.scss';
 import store from './redux/configureStore';
 
 ReactDOM.render(
