@@ -1,19 +1,20 @@
-const FETCH_STARTED = 'gni-per-capita-in-the-world/src/__mocks__/FETCH_STARTED';
-const FETCH_SUCCEDED = 'gni-per-capita-in-the-world/src/__mocks__/FETCH_SUCCEDED';
-const FETCH_FAILED = 'gni-per-capita-in-the-world/src/__mocks__/GNI_WORLD_FAILED';
+const FETCH_STARTED = 'gni-per-capita-in-the-world/gniWorld/FETCH_STARTED';
+const FETCH_SUCCEDED = 'gni-per-capita-in-the-world/gniWorld/FETCH_SUCCEDED';
+const FETCH_FAILED = 'gni-per-capita-in-the-world/gniWorld/GNI_WORLD_FAILED';
 
-const gniStartingState = {
+const initialState = {
   status: 'idle',
   entities: [],
 };
 
-const reducer = (state = gniStartingState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_STARTED:
+    case FETCH_STARTED: {
       return {
         ...state,
         status: 'starting',
       };
+    }
     case FETCH_SUCCEDED: {
       const newEntities = [];
       action.payload.forEach((obj) => {
@@ -45,14 +46,16 @@ const reducer = (state = gniStartingState, action) => {
         status: 'idle',
       };
     }
-    case FETCH_FAILED:
+    case FETCH_FAILED: {
       return {
         ...state,
         status: 'failed',
         error: action.payload,
       };
-    default:
+    }
+    default: {
       return state;
+    }
   }
 };
 

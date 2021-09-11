@@ -1,4 +1,7 @@
-const response = [
+import { rest } from 'msw';
+
+const URL = 'http://api.worldbank.org/v2/country/Z4;Z7;ZJ;ZQ;XU;8S;ZG;XM;XN;XT;XD/indicator/NY.GNP.PCAP.CD';
+const mockJsonResponse = [
   {
     page: 1,
     pages: 1,
@@ -60,4 +63,11 @@ const response = [
   ],
 ];
 
-export default response;
+const handlers = [
+  rest.get(URL, (req, res, ctx) => res(
+    ctx.status(200),
+    ctx.json(mockJsonResponse),
+  )),
+];
+
+export default handlers;

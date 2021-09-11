@@ -15,6 +15,7 @@ const initialState = {
 
 // Action Creators
 export const getGniWorldStarted = () => ({
+
   type: FETCH_STARTED,
 });
 
@@ -31,9 +32,8 @@ export const getGniWorldFailed = (payload) => ({
 export const fetchGniWorld = () => async (dispatch) => {
   dispatch(getGniWorldStarted());
   try {
-    const response = await fetch(baseURL, {});
-    const gniWorld = await response.json();
-    dispatch(getGniWorldSuccess(gniWorld[1]));
+    const data = await (await fetch(baseURL, {})).json();
+    dispatch(getGniWorldSuccess(data[1]));
   } catch (err) {
     dispatch(getGniWorldFailed(err.toString()));
   }

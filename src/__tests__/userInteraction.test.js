@@ -1,17 +1,14 @@
 import React from 'react';
-// import TestRenderer from 'react-test-renderer';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import {
-  fireEvent, render, cleanup,
-} from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import App from '../App';
 import LoadAnimation from '../components/LoadAnimation/LoadAnimation';
 import Header from '../components/Header/Header';
 import Filter from '../components/Filter/Filter';
-import gniWorldReducer from '../__mocks__/gniReducer';
-import detailsReducer from '../__mocks__/detailsReducer';
+import gniWorldReducer from '../mocks/gniReducer';
+import detailsReducer from '../mocks/detailsReducer';
 
 afterEach(cleanup);
 
@@ -81,10 +78,11 @@ test('Change category title when user clicks filter button', async () => {
     changeCategoryFilter,
   }; */
 
-  const { getByTestId, getByText } = renderWithRedux(<App />);
-
-  fireEvent.click(getByText('REGIONS'));
-  expect(await getByTestId('currentCategory').textContent).toBe('INCOME LEVELS');
+  const { findByText } = renderWithRedux(<App />);
+  expect(await findByText(/^north america$/i)).toBeInTheDocument();
+  // screen.getByText(/^north america$/i);
+  // fireEvent.click(getByText('REGIONS')); groupName
+  // expect(await getByTestId('groupName').textContent).toBe('NORTH AMERICA');
 });
 
 /* describe('Header', () => {
