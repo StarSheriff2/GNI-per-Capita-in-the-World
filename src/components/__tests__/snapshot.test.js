@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TestRenderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import App from '../../App';
 import store from '../../redux/configureStore';
-import Header from '../../components/Header/Header';
-import GniWorld from '../../components/GniWorld/GniWorld';
+import Header from '../Header/Header';
+import GniWorld from '../GniWorld/GniWorld';
 import Details from '../../pages/Details';
 
 describe('App', () => {
@@ -30,7 +30,7 @@ describe('Header', () => {
     };
 
     const header = TestRenderer.create(
-        <Header currentPath={initialPath} />
+      <Header currentPath={initialPath} />,
     ).toJSON();
     expect(header).toMatchSnapshot();
   });
@@ -39,6 +39,8 @@ describe('Header', () => {
 describe('GniWorld', () => {
   it('Renders the homepage GniWorld', () => {
     const pathX = '/';
+
+    const setPath = jest.fn();
 
     const func = (newPath) => {
       if (pathX !== newPath) {
