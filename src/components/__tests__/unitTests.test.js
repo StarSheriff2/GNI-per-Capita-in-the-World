@@ -199,19 +199,19 @@ describe('gniWorldReducer', () => {
       },
     );
   });
-/*
+
   test('should handle error', () => {
     const previousState = {
       status: 'idle',
-      entities: {},
+      entities: [],
     };
 
     const errorMessage = 'error message';
 
-    expect(gniWorldReducer(previousState, getDetailsFailed(errorMessage))).toEqual({
-      entities: {},
+    expect(gniWorldReducer(previousState, getGniWorldFailed(errorMessage))).toEqual({
+      entities: [],
       error: 'error message',
       status: 'failed',
     });
-  }); */
+  });
 });
