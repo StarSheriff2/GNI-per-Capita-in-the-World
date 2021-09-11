@@ -1,11 +1,11 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import App from '../../App';
-import store from '../../redux/configureStore';
-import Header from '../Header/Header';
-import GniWorld from '../GniWorld/GniWorld';
-import Details from '../../pages/Details';
+import App from '../App';
+import store from '../redux/configureStore';
+import Header from '../components/Header/Header';
+import GniWorld from '../components/GniWorld/GniWorld';
+import Details from '../pages/Details';
 
 describe('App', () => {
   it('Renders the Homepage', () => {

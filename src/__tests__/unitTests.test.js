@@ -1,5 +1,5 @@
-import detailsReducer, { getDetailsSuccess, getDetailsFailed } from '../../redux/details/details';
-import gniWorldReducer, { getGniWorldSuccess, getGniWorldFailed } from '../../redux/gniWorld/gniWorld';
+import detailsReducer, { getDetailsSuccess, getDetailsFailed } from '../redux/details/details';
+import gniWorldReducer, { getGniWorldSuccess, getGniWorldFailed } from '../redux/gniWorld/gniWorld';
 
 describe('detailsReducer', () => {
   test('should return the initial state', () => {

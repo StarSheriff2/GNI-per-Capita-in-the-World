@@ -1,6 +1,6 @@
-const FETCH_STARTED = 'gni-per-capita-in-the-world/src/components/__tests__/__mocks__/FETCH_STARTED';
-const FETCH_SUCCEDED = 'gni-per-capita-in-the-world/src/components/__tests__/__mocks__/FETCH_SUCCEDED';
-const FETCH_FAILED = 'gni-per-capita-in-the-world/src/components/__tests__/__mocks__/GNI_WORLD_FAILED';
+const FETCH_STARTED = 'gni-per-capita-in-the-world/src/__mocks__/FETCH_STARTED';
+const FETCH_SUCCEDED = 'gni-per-capita-in-the-world/src/__mocks__/FETCH_SUCCEDED';
+const FETCH_FAILED = 'gni-per-capita-in-the-world/src/__mocks__/GNI_WORLD_FAILED';
 
 const gniStartingState = {
   status: 'idle',

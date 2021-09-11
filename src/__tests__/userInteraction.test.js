@@ -1,6 +1,4 @@
 import React from 'react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 // import TestRenderer from 'react-test-renderer';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -8,89 +6,12 @@ import { Provider } from 'react-redux';
 import {
   fireEvent, render, cleanup,
 } from '@testing-library/react';
-import App from '../../App';
-import LoadAnimation from '../LoadAnimation/LoadAnimation';
-import Header from '../Header/Header';
-import Filter from '../Filter/Filter';
-import gniWorldReducer from './__mocks__/gniReducer';
-import detailsReducer from './__mocks__/detailsReducer';
-
-const jsonResponse = [
-  {
-    page: 1,
-    pages: 1,
-    per_page: 50,
-    total: 3,
-    sourceid: '2',
-    sourcename: 'World Development Indicators',
-    lastupdated: '2021-07-30',
-  },
-  [
-    {
-      indicator: {
-        id: 'NY.GNP.PCAP.CD',
-        value: 'GNI per capita, Atlas method (current US$)',
-      },
-      country: {
-        id: 'XU',
-        value: 'North America',
-      },
-      countryiso3code: 'NAC',
-      date: '2020',
-      value: 63921.605596663,
-      unit: '',
-      obs_status: '',
-      decimal: 0,
-    },
-    {
-      indicator: {
-        id: 'NY.GNP.PCAP.CD',
-        value: 'GNI per capita, Atlas method (current US$)',
-      },
-      country: {
-        id: '8S',
-        value: 'South Asia',
-      },
-      countryiso3code: 'SAS',
-      date: '2020',
-      value: 1820.60030063242,
-      unit: '',
-      obs_status: '',
-      decimal: 0,
-    },
-    {
-      indicator: {
-        id: 'NY.GNP.PCAP.CD',
-        value: 'GNI per capita, Atlas method (current US$)',
-      },
-      country: {
-        id: 'ZG',
-        value: 'Sub-Saharan Africa',
-      },
-      countryiso3code: 'SSF',
-      date: '2020',
-      value: 1478.56962278708,
-      unit: '',
-      obs_status: '',
-      decimal: 0,
-    },
-  ],
-];
-
-const handlers = [
-  rest.get('http://api.worldbank.org/v2/country/Z4;Z7;ZJ;ZQ;XU;8S;ZG;XM;XN;XT;XD/indicator/NY.GNP.PCAP.CD?format=json&mrv=1&gapfill=Y', (req, res, ctx) => res(ctx.json(jsonResponse), ctx.delay(150))),
-];
-
-const server = setupServer(...handlers);
-
-// Enable API mocking before tests.
-beforeAll(() => server.listen());
-
-// Reset any runtime request handlers we may add during the tests.
-afterEach(() => server.resetHandlers());
-
-// Disable API mocking after the tests are done.
-afterAll(() => server.close());
+import App from '../App';
+import LoadAnimation from '../components/LoadAnimation/LoadAnimation';
+import Header from '../components/Header/Header';
+import Filter from '../components/Filter/Filter';
+import gniWorldReducer from '../__mocks__/gniReducer';
+import detailsReducer from '../__mocks__/detailsReducer';
 
 afterEach(cleanup);
 
