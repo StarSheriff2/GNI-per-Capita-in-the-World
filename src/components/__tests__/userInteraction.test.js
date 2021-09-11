@@ -1,77 +1,106 @@
 import React from 'react';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 // import TestRenderer from 'react-test-renderer';
-import { createStore } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import {
-  fireEvent, render, cleanup, screen,
+  fireEvent, render, cleanup,
 } from '@testing-library/react';
-// import App from '../../App';
+import App from '../../App';
 import LoadAnimation from '../LoadAnimation/LoadAnimation';
 import Header from '../Header/Header';
 import Filter from '../Filter/Filter';
+import gniWorldReducer from './__mocks__/gniReducer';
+import detailsReducer from './__mocks__/detailsReducer';
 
-const FETCH_STARTED = 'gni-per-capita-in-the-world/src/components/__tests__/FETCH_STARTED';
-const FETCH_SUCCEDED = 'gni-per-capita-in-the-world/src/components/__tests__/FETCH_SUCCEDED';
-const FETCH_FAILED = 'gni-per-capita-in-the-world/src/components/__tests__/GNI_WORLD_FAILED';
+const jsonResponse = [
+  {
+    page: 1,
+    pages: 1,
+    per_page: 50,
+    total: 3,
+    sourceid: '2',
+    sourcename: 'World Development Indicators',
+    lastupdated: '2021-07-30',
+  },
+  [
+    {
+      indicator: {
+        id: 'NY.GNP.PCAP.CD',
+        value: 'GNI per capita, Atlas method (current US$)',
+      },
+      country: {
+        id: 'XU',
+        value: 'North America',
+      },
+      countryiso3code: 'NAC',
+      date: '2020',
+      value: 63921.605596663,
+      unit: '',
+      obs_status: '',
+      decimal: 0,
+    },
+    {
+      indicator: {
+        id: 'NY.GNP.PCAP.CD',
+        value: 'GNI per capita, Atlas method (current US$)',
+      },
+      country: {
+        id: '8S',
+        value: 'South Asia',
+      },
+      countryiso3code: 'SAS',
+      date: '2020',
+      value: 1820.60030063242,
+      unit: '',
+      obs_status: '',
+      decimal: 0,
+    },
+    {
+      indicator: {
+        id: 'NY.GNP.PCAP.CD',
+        value: 'GNI per capita, Atlas method (current US$)',
+      },
+      country: {
+        id: 'ZG',
+        value: 'Sub-Saharan Africa',
+      },
+      countryiso3code: 'SSF',
+      date: '2020',
+      value: 1478.56962278708,
+      unit: '',
+      obs_status: '',
+      decimal: 0,
+    },
+  ],
+];
+
+const handlers = [
+  rest.get('http://api.worldbank.org/v2/country/Z4;Z7;ZJ;ZQ;XU;8S;ZG;XM;XN;XT;XD/indicator/NY.GNP.PCAP.CD?format=json&mrv=1&gapfill=Y', (req, res, ctx) => res(ctx.json(jsonResponse), ctx.delay(150))),
+];
+
+const server = setupServer(...handlers);
+
+// Enable API mocking before tests.
+beforeAll(() => server.listen());
+
+// Reset any runtime request handlers we may add during the tests.
+afterEach(() => server.resetHandlers());
+
+// Disable API mocking after the tests are done.
+afterAll(() => server.close());
 
 afterEach(cleanup);
 
-const startingState = {
-  status: 'idle',
-  entities: [],
-};
-
-const reducer = (state = startingState, action) => {
-  switch (action.type) {
-    case FETCH_STARTED:
-      return {
-        ...state,
-        status: 'starting',
-      };
-    case FETCH_SUCCEDED: {
-      const newEntities = [];
-      action.payload.forEach((obj) => {
-        if (obj.country.value.includes('income')) {
-          newEntities.push(
-            {
-              name: obj.country.value,
-              indicator: obj.value,
-              id: obj.country.id,
-              date: obj.date,
-              category: 'income',
-            },
-          );
-        } else {
-          newEntities.push(
-            {
-              name: obj.country.value,
-              indicator: obj.value,
-              id: obj.countryiso3code,
-              date: obj.date,
-              category: 'region',
-            },
-          );
-        }
-      });
-      return {
-        ...state,
-        entities: newEntities,
-        status: 'idle',
-      };
-    }
-    case FETCH_FAILED:
-      return {
-        ...state,
-        status: 'failed',
-        error: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+const reducer = combineReducers({
+  gniWorld: gniWorldReducer,
+  details: detailsReducer,
+});
 
 const renderWithRedux = (component,
-  { initialState, store = createStore(reducer, initialState) } = {}) => ({
+  { initialState, store = createStore(reducer, applyMiddleware(thunk), initialState) } = {}) => ({
   ...render(<Provider store={store}>{component}</Provider>),
 });
 
@@ -113,11 +142,12 @@ test('Render \'Regions\' in homepage on first App render', () => {
     otherCategory={props.otherCategory}
     changeCategoryFilter={props.changeCategoryFilter}
   />);
+
   expect(getByTestId('currentCategory').textContent).toBe('REGIONS');
 });
 
-test('Change category title when user clicks filter button', () => {
-  const setCategoryFilter = jest.fn();
+test('Change category title when user clicks filter button', async () => {
+  /* const setCategoryFilter = jest.fn();
 
   const changeCategoryFilter = () => setCategoryFilter((actualCategory) => ({
     current: actualCategory.other,
@@ -128,15 +158,12 @@ test('Change category title when user clicks filter button', () => {
     currentCategory: 'region',
     otherCategory: 'income',
     changeCategoryFilter,
-  };
+  }; */
 
-  const { getByTestId } = renderWithRedux(<Filter
-    currentCategory={props.currentCategory}
-    otherCategory={props.otherCategory}
-    changeCategoryFilter={props.changeCategoryFilter}
-  />);
-  fireEvent.click(screen.getByText('REGIONS'));
-  expect(getByTestId('currentCategory').textContent).toBe('INCOME LEVELS');
+  const { getByTestId, getByText } = renderWithRedux(<App />);
+
+  fireEvent.click(getByText('REGIONS'));
+  expect(await getByTestId('currentCategory').textContent).toBe('INCOME LEVELS');
 });
 
 /* describe('Header', () => {
