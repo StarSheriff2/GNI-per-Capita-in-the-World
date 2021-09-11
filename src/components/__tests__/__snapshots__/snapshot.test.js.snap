@@ -6,12 +6,14 @@ exports[`App Renders the Homepage 1`] = `
 >
   <header
     className="d-flex header"
+    data-testid="header"
   >
     <div
       className="d-none"
     />
     <p
       className="homePath"
+      data-testid="headerText"
     >
       gni per capita in the world
     </p>
@@ -32,6 +34,7 @@ exports[`App Renders the Homepage 1`] = `
       >
         <h2
           className="currentCategory"
+          data-testid="currentCategory"
         >
           REGIONS
         </h2>
@@ -127,6 +130,7 @@ exports[`GniWorld Renders the homepage GniWorld 1`] = `
   >
     <span
       className="sr-only"
+      data-testid="spinnerSpan"
     >
       Loading...
     </span>
@@ -137,12 +141,14 @@ exports[`GniWorld Renders the homepage GniWorld 1`] = `
 exports[`Header Renders the Header 1`] = `
 <header
   className="d-flex header"
+  data-testid="header"
 >
   <div
     className="d-none"
   />
   <p
     className="homePath"
+    data-testid="headerText"
   >
     gni per capita in the world
   </p>
