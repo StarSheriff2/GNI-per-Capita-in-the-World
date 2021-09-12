@@ -33,12 +33,12 @@ const Header = (props) => {
       <div className="d-none" />
     );
     navigationPath = (
-      <p className={`${styles.homePath}`}>gni per capita in the world</p>
+      <p className={`${styles.homePath}`} data-testid="headerText">gni per capita in the world</p>
     );
   }
 
   return (
-    <header className={`d-flex ${styles.header}`}>
+    <header className={`d-flex ${styles.header}`} data-testid="header">
       {backArrow}
       {navigationPath}
     </header>

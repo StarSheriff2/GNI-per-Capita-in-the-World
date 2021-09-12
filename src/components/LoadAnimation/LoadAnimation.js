@@ -8,7 +8,7 @@ const sizing = {
 
 const LoadAnimation = () => (
   <div className="spinner-border" role="status" style={sizing}>
-    <span className="sr-only">Loading...</span>
+    <span className="sr-only" data-testid="spinnerSpan">Loading...</span>
   </div>
 );
 

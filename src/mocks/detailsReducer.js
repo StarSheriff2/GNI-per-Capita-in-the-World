@@ -1,55 +1,12 @@
-// API Query Keywords
-import incomeLevel from '../../filters/incomeLevel';
-import regions from '../../filters/regions';
-
-// Actions
 const FETCH_STARTED = 'gni-per-capita-in-the-world/details/FETCH_STARTED';
 const FETCH_SUCCEDED = 'gni-per-capita-in-the-world/details/FETCH_SUCCEDED';
 const FETCH_FAILED = 'gni-per-capita-in-the-world/details/DETAILS_FAILED';
-
-// API
-const baseURL = 'https://api.worldbank.org/v2/country/';
-
-// Initial State
 
 const initialState = {
   status: 'idle',
   entities: {},
 };
 
-// Action Creators
-export const getDetailsStarted = () => ({
-  type: FETCH_STARTED,
-});
-
-export const getDetailsSuccess = (payload) => ({
-  type: FETCH_SUCCEDED,
-  payload,
-});
-
-export const getDetailsFailed = (payload) => ({
-  type: FETCH_FAILED,
-  payload,
-});
-
-export const fetchDetails = (groupId, category) => async (dispatch) => {
-  dispatch(getDetailsStarted());
-  const groupCountriesId = (category === 'region') ? regions[groupId] : incomeLevel[groupId];
-  try {
-    const data = await (await fetch(`${baseURL + groupCountriesId}/indicator/NY.GNP.PCAP.CD?per_page=100&format=json&mrnev=1`, {
-      mode: 'cors',
-    })).json();
-    const newGroup = {
-      groupName: groupId,
-      groupCountries: data[1],
-    };
-    dispatch(getDetailsSuccess(newGroup));
-  } catch (err) {
-    dispatch(getDetailsFailed(err.toString()));
-  }
-};
-
-// Reducer
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_STARTED:
