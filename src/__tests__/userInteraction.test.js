@@ -45,7 +45,9 @@ describe('Hompage', () => {
 
     const pathX = '/';
 
-    const setPath = (newPath) => initialPath = newPath;
+    const setPath = (newPath) => {
+      initialPath = newPath;
+    };
 
     const updatePath = (newPath) => {
       if (pathX !== newPath) {
@@ -53,7 +55,10 @@ describe('Hompage', () => {
       }
     };
 
-    const { getByTestId } = renderWithRedux(<Header currentPath={initialPath} updatePath={updatePath} />);
+    const { getByTestId } = renderWithRedux(<Header
+      currentPath={initialPath}
+      updatePath={updatePath}
+    />);
     expect(getByTestId('headerText').textContent).toBe('gni per capita in the world');
   });
 
@@ -119,39 +124,7 @@ describe('Hompage', () => {
 
 describe('Details page by current group', () => {
   test('When user clicks the back arrow, app goes back to homepage', async () => {
-    let initialPath = {
-      path: '/',
-      groupId: '',
-      currentCategory: {
-        current: 'region',
-        other: 'income',
-      },
-    };
-
-    const { findByText, getByTestId } = renderWithRedux(<App />, applyMiddleware(thunk), {
-      initialState: {
-        gniWorld: {
-          status: 'idle',
-          entities: [
-            {name: "East Asia & Pacific", indicator: 11706.2486723881, id: "EAS", date: "2020", category: "region"},
-            {name: "Europe & Central Asia", indicator: 25212.5210325623, id: "ECS", date: "2020", category: "region"},
-            {name: "High income", indicator: 46036.0466787998, id: "XD", date: "2020", category: "income"},
-            {name: "Latin America & Caribbean", indicator: 7715.11850464998, id: "LCN", date: "2020", category: "region"},
-            {name: "Low income", indicator: 810.751972755762, id: "XM", date: "2020", category: "income"},
-            {name: "Lower middle income", indicator: 2200.71995911578, id: "XN", date: "2020", category: "income"},
-            {name: "Middle East & North Africa", indicator: 6917.78109613348, id: "MEA", date: "2020", category: "region"},
-            {name: "North America", indicator: 63921.605596663, id: "NAC", date: "2020", category: "region"},
-            {name: "South Asia", indicator: 1820.60030063242, id: "SAS", date: "2020", category: "region"},
-            {name: "Sub-Saharan Africa", indicator: 1478.56962278708, id: "SSF", date: "2020", category: "region"},
-            {name: "Upper middle income", indicator: 9425.53004618163, id: "XT", date: "2020", category: "income"},
-          ],
-        },
-        details: {
-          status: 'idle',
-          entities: {},
-        }
-      }
-    });
+    const { findByText, getByTestId } = renderWithRedux(<App />);
 
     userEvent.click(await findByText(/^south asia$/i));
     expect(await findByText(/^india$/i)).toBeInTheDocument();
