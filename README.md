@@ -40,6 +40,10 @@ For testing I used Jest, React's Testing Library, and MSW (for API mocking).
 
 Deployed to Netlify: [Live Demo](https://agitated-sinoussi-e23bf8.netlify.app/#/)
 
+### Video Presentation
+
+[Video here](https://www.loom.com/share/755770ec7dfa49b486f54ed41f97ff67?sharedAppSource=personal_library)
+
 ### Built With
 - HTML, CSS, JavaScript
 - sass 1.38.0
