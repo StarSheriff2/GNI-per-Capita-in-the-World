@@ -3,6 +3,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { render, cleanup } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
 import LoadAnimation from '../components/LoadAnimation/LoadAnimation';
 import Header from '../components/Header/Header';
@@ -22,12 +23,12 @@ const renderWithRedux = (component,
   ...render(<Provider store={store}>{component}</Provider>),
 });
 
-test('Shows spinner while status of state is \'starting\'', () => {
+test('Shows correct hidden text', () => {
   const { getByTestId } = renderWithRedux(<LoadAnimation />);
   expect(getByTestId('spinnerSpan').textContent).toBe('Loading...');
 });
 
-test('Render homepage after successfully making API call', () => {
+test('Shows correct title when in homepage', () => {
   const initialPath = {
     path: '/',
     groupId: '',
@@ -41,7 +42,7 @@ test('Render homepage after successfully making API call', () => {
   expect(getByTestId('headerText').textContent).toBe('gni per capita in the world');
 });
 
-test('Render \'Regions\' in homepage on first App render', () => {
+test('Shows correct title', () => {
   const setCategoryFilter = jest.fn();
 
   const changeCategoryFilter = () => setCategoryFilter((actualCategory) => ({
@@ -64,25 +65,35 @@ test('Render \'Regions\' in homepage on first App render', () => {
   expect(getByTestId('currentCategory').textContent).toBe('REGIONS');
 });
 
-test('Change category title when user clicks filter button', async () => {
-  /* const setCategoryFilter = jest.fn();
-
-  const changeCategoryFilter = () => setCategoryFilter((actualCategory) => ({
-    current: actualCategory.other,
-    other: actualCategory.current,
-  }));
-
-  const props = {
-    currentCategory: 'region',
-    otherCategory: 'income',
-    changeCategoryFilter,
-  }; */
-
+test('Show group regions in homepage on first render of app', async () => {
   const { findByText } = renderWithRedux(<App />);
   expect(await findByText(/^north america$/i)).toBeInTheDocument();
-  // screen.getByText(/^north america$/i);
-  // fireEvent.click(getByText('REGIONS')); groupName
-  // expect(await getByTestId('groupName').textContent).toBe('NORTH AMERICA');
+});
+
+test('Change category title when user clicks filter button', async () => {
+  const { getByTestId, findByRole } = renderWithRedux(<App />);
+
+  expect(getByTestId('spinnerSpan').textContent).toBe('Loading...');
+
+  userEvent.click(await findByRole('button'));
+  expect(getByTestId('currentCategory').textContent).toBe('INCOME LEVELS');
+  expect(getByTestId('currentCategory').textContent).not.toBe('REGIONS');
+});
+
+test('Should briefly show Spinner when status of state is \'starting\'', async () => {
+  const { getByTestId } = renderWithRedux(<App />);
+
+  expect(getByTestId('spinnerSpan').textContent).toBe('Loading...');
+});
+
+test('When user clicks a region in the homepage, the app renders the corrsponding details page', async () => {
+  const { findByText } = renderWithRedux(<App />);
+
+  expect(await findByText(/^south asia$/i)).toBeInTheDocument();
+  userEvent.click(await findByText(/^south asia$/i));
+  // expect(findByText(/^india$/i)).toBe('India');
+  expect(await findByText(/^india$/i)).toBeInTheDocument();
+  // expect(getByTestId('currentCategory').textContent).not.toBe('REGIONS');
 });
 
 /* describe('Header', () => {

@@ -36,13 +36,12 @@ export const fetchDetails = (groupId, category) => async (dispatch) => {
   dispatch(getDetailsStarted());
   const groupCountriesId = (category === 'region') ? regions[groupId] : incomeLevel[groupId];
   try {
-    const response = await fetch(`${baseURL + groupCountriesId}/indicator/NY.GNP.PCAP.CD?per_page=100&format=json&mrnev=1`, {
+    const data = await (await fetch(`${baseURL + groupCountriesId}/indicator/NY.GNP.PCAP.CD?per_page=100&format=json&mrnev=1`, {
       mode: 'cors',
-    });
-    const details = await response.json();
+    })).json();
     const newGroup = {
       groupName: groupId,
-      groupCountries: details[1],
+      groupCountries: data[1],
     };
     dispatch(getDetailsSuccess(newGroup));
   } catch (err) {
