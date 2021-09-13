@@ -1,0 +1,20 @@
+@import '../styles/abstracts/variables';
+@import '../styles/abstracts/mixins';
+
+.spinnerContainer {
+  @include d-flex(row, center, center);
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.countryWrapper {
+  background-color: $pink-light-dark;
+}
+
+.countryWrapper:nth-child(2n) {
+  background-color: $pink-medium-dark;
+}

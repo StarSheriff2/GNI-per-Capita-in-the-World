@@ -1,0 +1,15 @@
+@import '../../styles/abstracts/mixins';
+
+.countryContainer {
+  @include d-flex(row, space-between, center);
+
+  padding: 3rem 1rem;
+}
+
+.indicatorData {
+  @include d-flex(row, center, center);
+}
+
+.interPunct {
+  font-size: 3rem;
+}

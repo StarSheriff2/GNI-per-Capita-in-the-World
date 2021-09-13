@@ -1,0 +1,69 @@
+@use '../abstracts/' as *;
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: $primary-font;
+  font-size: 1.6rem;
+  color: $white;
+  background-color: $pink-light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  height: 100vh;
+}
+
+a,
+a:visited,
+a:active,
+a:hover {
+  text-decoration: none;
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  color: $white;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.active-group {
+  opacity: 1;
+}
+
+/*
+  ========================
+
+  Media Queries
+
+  ========================
+*/
+
+/* Large devices (laptops/desktops, 769px and up) */
+
+/* @media only screen and (min-width: 769px) {
+  .page-section {
+    padding: 0;
+  }
+} */

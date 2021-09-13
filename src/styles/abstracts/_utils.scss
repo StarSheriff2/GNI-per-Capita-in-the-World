@@ -1,0 +1,17 @@
+.d-none {
+  display: none;
+}
+
+.hidden {
+  position: absolute;
+  height: 0;
+  left: -10000px;
+}
+
+.d-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}

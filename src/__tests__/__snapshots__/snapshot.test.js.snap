@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Renders the Homepage 1`] = `
+<div
+  className="App"
+>
+  <header
+    className="d-flex header"
+    data-testid="header"
+  >
+    <div
+      className="d-none"
+    />
+    <p
+      className="homePath"
+      data-testid="headerText"
+    >
+      gni per capita in the world
+    </p>
+  </header>
+  <section>
+    <div
+      className="filterContainer"
+    >
+      <div
+        className="d-flex iconContainer"
+      >
+        <i
+          className="fas fa-globe worldIcon"
+        />
+      </div>
+      <div
+        className="filterController"
+      >
+        <h2
+          className="currentCategory"
+          data-testid="currentCategory"
+        >
+          REGIONS
+        </h2>
+        <p
+          className="filterLabel"
+        >
+          Filter Category: 
+        </p>
+        <button
+          className="filterButton"
+          onClick={[Function]}
+          type="button"
+        >
+          INCOME
+        </button>
+      </div>
+    </div>
+    <p
+      className="indicatorDescription"
+    >
+      indicators by country region
+    </p>
+    <div
+      className="groupListContainer"
+    />
+  </section>
+</div>
+`;
+
+exports[`Details Renders the Details page 1`] = `
+<section>
+  <div
+    className="filterContainer"
+  >
+    <div
+      className="d-flex iconContainer"
+    >
+      <div
+        className="incomeLevelIconDiv"
+      >
+        <i
+          className="fas fa-dollar-sign incomeLevelIcon"
+        />
+        <i
+          className="fas fa-dollar-sign incomeLevelIcon"
+        />
+        <i
+          className="fas fa-dollar-sign incomeLevelIcon"
+        />
+      </div>
+    </div>
+    <div
+      className="filterController"
+    >
+      <h2
+        className="currentGroup"
+      >
+        
+      </h2>
+      <p
+        className="groupIndicator"
+      >
+        $ 0
+      </p>
+    </div>
+  </div>
+  <p
+    className="indicatorDescription"
+  >
+    country breakdown
+  </p>
+  <div
+    className="details-container"
+  >
+    
+  </div>
+</section>
+`;
+
+exports[`GniWorld Renders the homepage GniWorld 1`] = `
+<section
+  className="spinnerContainer"
+>
+  <div
+    className="spinner-border"
+    role="status"
+    style={
+      Object {
+        "height": "14rem",
+        "width": "14rem",
+      }
+    }
+  >
+    <span
+      className="sr-only"
+      data-testid="spinnerSpan"
+    >
+      Loading...
+    </span>
+  </div>
+</section>
+`;
+
+exports[`Header Renders the Header 1`] = `
+<header
+  className="d-flex header"
+  data-testid="header"
+>
+  <div
+    className="d-none"
+  />
+  <p
+    className="homePath"
+    data-testid="headerText"
+  >
+    gni per capita in the world
+  </p>
+</header>
+`;
