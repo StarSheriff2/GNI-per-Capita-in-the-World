@@ -87,7 +87,7 @@ describe('Hompage', () => {
 
   test('Show group regions on first render of app', async () => {
     const { findByText } = renderWithRedux(<App />);
-    expect(await findByText(/^north america$/i)).toBeInTheDocument();
+    expect(await findByText('North America')).toBeInTheDocument();
   });
 
   test('Change category title when user clicks filter button', async () => {
@@ -109,15 +109,15 @@ describe('Hompage', () => {
   test('When user clicks a region area, the app renders the corrsponding details page', async () => {
     const { findByText } = renderWithRedux(<App />);
 
-    expect(await findByText(/^south asia$/i)).toBeInTheDocument();
-    userEvent.click(await findByText(/^south asia$/i));
-    expect(await findByText(/^india$/i)).toBeInTheDocument();
-    expect(await findByText(/^pakistan$/i)).toBeInTheDocument();
-    const aus = screen.queryByText(/^australia$/i);
+    expect(await findByText('South Asia')).toBeInTheDocument();
+    userEvent.click(await findByText('South Asia'));
+    expect(await findByText('India')).toBeInTheDocument();
+    expect(await findByText('Pakistan')).toBeInTheDocument();
+    const aus = screen.queryByText('Australia');
     expect(aus).not.toBeInTheDocument();
-    const bhu = screen.queryByText(/^bhutan$/i);
+    const bhu = screen.queryByText('Bhutan');
     expect(bhu).toBeInTheDocument();
-    const arrowBtn = screen.queryByText(/^<$/i);
+    const arrowBtn = screen.queryByText('<');
     userEvent.click(arrowBtn);
   });
 });
@@ -126,11 +126,11 @@ describe('Details page by current group', () => {
   test('When user clicks the back arrow, app goes back to homepage', async () => {
     const { findByText, getByTestId } = renderWithRedux(<App />);
 
-    userEvent.click(await findByText(/^south asia$/i));
-    expect(await findByText(/^india$/i)).toBeInTheDocument();
-    const arrowBtn = screen.queryByText(/^<$/i);
+    userEvent.click(await findByText('South Asia'));
+    expect(await findByText('India')).toBeInTheDocument();
+    const arrowBtn = screen.queryByText('<');
     userEvent.click(arrowBtn);
-    expect(await findByText(/^north america$/i)).toBeInTheDocument();
+    expect(await findByText('North America')).toBeInTheDocument();
     expect(getByTestId('currentCategory').textContent).toBe('REGIONS');
   });
 });
