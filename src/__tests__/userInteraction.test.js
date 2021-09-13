@@ -13,10 +13,6 @@ import detailsReducer from '../mocks/detailsReducer';
 
 afterEach(cleanup);
 
-beforeEach(() => {
-  jest.resetModules();
-});
-
 const reducer = combineReducers({
   gniWorld: gniWorldReducer,
   details: detailsReducer,
