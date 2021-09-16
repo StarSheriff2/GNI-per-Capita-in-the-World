@@ -1,27 +1,28 @@
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { fetchDetails } from '../../redux/details/details';
+// import { fetchDetails } from '../../redux/details/details';
 import styles from './GroupsList.module.scss';
 
-const GroupsList = (props) => {
-  const { groups, category, updatePath } = props;
+const GroupsList = ({ groups, category, updatePath }) => {
   const { current, other } = category;
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const groupCountries = useSelector((state) => state.details.entities, shallowEqual);
+  /*  const groupCountries = useSelector((state) => state.details.entities, shallowEqual);
 
   const addGroupCountries = (groupId) => {
     dispatch(fetchDetails(groupId, current));
   };
 
-  const isGroupCountry = (groupId) => groupId in groupCountries;
+  const isGroupCountry = (groupId) => groupId in groupCountries; */
 
-  const path = (str) => str
-    .toLowerCase()
-    .replaceAll(' ', '-')
-    .replaceAll('&', 'and');
+  const path = (str) => {
+    str
+      .toLowerCase()
+      .replaceAll(' ', '-')
+      .replaceAll('&', 'and');
+  };
 
   const groupIcon = (groupName) => {
     if (groupName.includes('Europe')) {
@@ -68,20 +69,19 @@ const GroupsList = (props) => {
 
   return (
     <>
-      {groups
-        .filter((group) => group.category === current)
-        .sort((a, b) => a.indicator < b.indicator)
+      {groups.entities
+        .sort((a, b) => a.value < b.value)
         .map((group) => (
           <NavLink
             className={`${styles.groupContainer}`}
-            key={group.id}
-            to={`/groups/${path(group.name)}/`}
+            key={group.country.id}
+            to={`/groups/${path(group.country.value)}/`}
             activeClassName="active-group"
             onClick={() => {
-              if (!isGroupCountry(group.id)) addGroupCountries(group.id);
+              // if (!isGroupCountry(group.countryiso3code)) addGroupCountries(group.id);
               updatePath({
-                path: path(`/groups/${path(group.name)}/`),
-                groupId: group.id,
+                path: path(`/groups/${path(group.country.value)}/`),
+                groupId: group.countryiso3code,
                 currentCategory: {
                   current,
                   other,
@@ -90,11 +90,11 @@ const GroupsList = (props) => {
             }}
           >
             <div className={`${styles.groupDivContainer}`}>
-              {groupIcon(group.name)}
+              {groupIcon(group.country.value)}
               <i className={`far fa-arrow-alt-circle-right ${styles.arrowIcon}`} />
               <div>
-                <h3 className={`${styles.groupName}`}>{group.name}</h3>
-                <p>{`$ ${Math.trunc(group.indicator).toLocaleString()}`}</p>
+                <h3 className={`${styles.groupName}`}>{group.country.value}</h3>
+                <p>{`$ ${Math.trunc(group.value).toLocaleString()}`}</p>
               </div>
             </div>
           </NavLink>
@@ -103,7 +103,7 @@ const GroupsList = (props) => {
   );
 };
 
-GroupsList.propTypes = {
+/* GroupsList.propTypes = {
   groups: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     indicator: PropTypes.number.isRequired,
@@ -114,6 +114,6 @@ GroupsList.propTypes = {
     other: PropTypes.string.isRequired,
   }).isRequired,
   updatePath: PropTypes.func.isRequired,
-};
+}; */
 
 export default GroupsList;
