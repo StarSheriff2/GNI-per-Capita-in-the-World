@@ -7,7 +7,7 @@ import Filter from '../Filter/Filter';
 import LoadAnimation from '../LoadAnimation/LoadAnimation';
 import styles from './GniWorld.module.scss';
 import regionsApiCodes from '../../filters/regions';
-import incomeLevelApiCodes from '../../filters/incomeLevel';
+import { incomeLevelShort } from '../../filters/incomeLevel';
 
 const GniWorld = (props) => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const GniWorld = (props) => {
   const [incomeLevels, setIncomeLevels] = useState({ loaded: false, entities: [] });
 
   const getRegions = () => gniWorld.filter((entity) => regionsApiCodes.includes(entity.country.id));
-  const getIncomeLevels = () => gniWorld.filter((entity) => incomeLevelApiCodes.includes(entity.country.id));
+  const getIncomeLevels = () => gniWorld.filter((entity) => incomeLevelShort.includes(entity.country.id));
 
   /*  const [categoryFilter, setCategoryFilter] = useState({
     current,

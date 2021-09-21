@@ -18,7 +18,7 @@ const GroupsList = ({ groups, category, updatePath }) => {
   const isGroupCountry = (groupId) => groupId in groupCountries; */
 
   const path = (str) => {
-    str
+    return str
       .toLowerCase()
       .replaceAll(' ', '-')
       .replaceAll('&', 'and');
@@ -78,15 +78,17 @@ const GroupsList = ({ groups, category, updatePath }) => {
             to={`/groups/${path(group.country.value)}/`}
             activeClassName="active-group"
             onClick={() => {
-              // if (!isGroupCountry(group.countryiso3code)) addGroupCountries(group.id);
+              console.log('youClicked group: ', group.country.value);
+              const groupId = (current === 'region') ? group.countryiso3code : group.country.id;
               updatePath({
-                path: path(`/groups/${path(group.country.value)}/`),
-                groupId: group.countryiso3code,
+                path: `/groups/${path(group.country.value)}/`,
+                groupId,
                 currentCategory: {
                   current,
                   other,
                 },
               });
+              console.log('path in App: ', path(group.country.value));
             }}
           >
             <div className={`${styles.groupDivContainer}`}>

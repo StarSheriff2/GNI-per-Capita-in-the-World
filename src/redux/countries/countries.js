@@ -1,6 +1,7 @@
 // API Query Keywords
 // import incomeLevel from '../../filters/incomeLevel';
 // import regions from '../../filters/regions';
+import incomeLevelCodes from '../../filters/incomeLevel';
 
 // Actions
 const FETCH_STARTED = 'gni-per-capita-in-the-world/countries/FETCH_STARTED';
@@ -32,16 +33,26 @@ export const getCountriesFailed = (payload) => ({
   payload,
 });
 
-export const fetchCountries = (groupId) => async (dispatch) => {
+export const fetchCountries = (groupId, category) => async (dispatch) => {
   dispatch(getCountriesStarted());
-  const query = `?format=json&per_page=100&region=${groupId}`;
-  // const groupCountriesId = (category === 'region') ? regions[groupId] : incomeLevel[groupId];
+  let aggregateFilter;
+  let id;
+  // console.log('groupID: ', groupId);
+  if (category === 'region') {
+    aggregateFilter = category;
+    id = groupId;
+  } else {
+    aggregateFilter = 'incomelevel';
+    id = incomeLevelCodes[groupId];
+  }
+  console.log('countriesSlice___ID: ', id);
+  const query = `?format=json&per_page=100&${aggregateFilter}=${id}`;
   try {
     const data = await (await fetch(baseURL + query, {
       mode: 'cors',
     })).json();
     const newGroup = {
-      groupName: groupId,
+      groupName: id,
       groupCountries: data[1],
     };
     dispatch(getCountriesSuccess(newGroup));

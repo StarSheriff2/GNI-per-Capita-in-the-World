@@ -5,11 +5,15 @@ import { fetchGniWorld } from '../redux/gniWorld/gniWorld';
 import { fetchCountries } from '../redux/countries/countries';
 import LoadAnimation from '../components/LoadAnimation/LoadAnimation';
 import Country from '../components/Country/Country';
-// import GroupHeader from '../components/GroupHeader/GroupHeader';
+import GroupHeader from '../components/GroupHeader/GroupHeader';
 import styles from './Countries.module.scss';
+import incomeLevelCodes from '../filters/incomeLevel';
 
 const Countries = (props) => {
   const { currentPath, groupId } = props;
+  const { currentCategory, path } = currentPath;
+
+  console.log('path in COuntries', currentPath);
 
   const dispatch = useDispatch();
 
@@ -19,15 +23,24 @@ const Countries = (props) => {
   const countriesLoadingStatus = useSelector((state) => state.countries.status);
   // const [countries, setCountries] = useState({ mounted: false })
 
-  let currentCountries = { fetched: false }
+  let currentCountries = { fetched: false };
 
-  if (groupId in groupCountries) {
+  const validateGroupId = () => {
+    if (currentCategory.current === 'region') {
+      return groupId;
+    }
+    return incomeLevelCodes[groupId];
+  };
+
+  if (validateGroupId() in groupCountries) {
+    const id = validateGroupId();
+    console.log('groupCOuntries: ', groupCountries[id]);
     currentCountries = {
       fetched: true,
-      countries: groupCountries[groupId].map((country) => {
+      countries: groupCountries[id].map((country) => {
         let indicator = { value: null, date: null };
 
-        for (let i = 0; i < gniWorld.length; i+= 1) {
+        for (let i = 0; i < gniWorld.length; i += 1) {
           if (gniWorld[i].countryiso3code === country.id) {
             indicator = { value: gniWorld[i].value, date: gniWorld[i].date };
             break;
@@ -37,10 +50,9 @@ const Countries = (props) => {
         return ({
           ...country,
           ...indicator,
-        })
+        });
       }),
-    }
-
+    };
   }
 
   //  for countries: "id": "ABW",
@@ -49,8 +61,8 @@ const Countries = (props) => {
     if (gniWorld.length === 0) {
       dispatch(fetchGniWorld());
     }
-    if (gniWorld.length > 0 && !(groupId in groupCountries)) {
-      dispatch(fetchCountries(groupId));
+    if (gniWorld.length > 0 && !(validateGroupId() in groupCountries)) {
+      dispatch(fetchCountries(groupId, currentCategory.current));
     }
   }, [gniWorld]);
 
@@ -60,17 +72,17 @@ const Countries = (props) => {
         <LoadAnimation />
       </section>
     );
-  };
+  }
 
-  console.log('current', currentCountries);
+  // console.log('current', currentCountries);
 
   return (
     <section>
       {/* {currentCountries.fetched && console.log('hello')} */}
-      {/* <GroupHeader
-        currentPath={currentPath}
+      <GroupHeader
+        currentPath={path}
         groupId={groupId}
-      /> */}
+      />
       <div className="details-container">
         {currentCountries.fetched && currentCountries.countries
           .sort((a, b) => a.value < b.value)
@@ -79,7 +91,7 @@ const Countries = (props) => {
               <Country country={country} />
             </li>
           ))}
-          {/* .forEach((country) => console.log('country: ', country)) */}
+        {/* .forEach((country) => console.log('country: ', country)) */}
       </div>
     </section>
   );

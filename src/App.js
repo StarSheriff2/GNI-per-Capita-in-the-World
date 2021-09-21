@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   HashRouter as Router,
   Switch,
@@ -20,10 +20,16 @@ const App = () => {
 
   const [path, setPath] = useState(initialPath);
 
+  useEffect(() => {
+    console.log(path.path);
+  }, [path])
+
   const updatePath = (newPath) => {
     if (path !== newPath) {
       setPath((actualPath) => ({ ...actualPath, ...newPath }));
     }
+    // console.log('current path is', path);
+    // console.log('this path changed to: ', newPath);
   };
 
   return (
@@ -36,7 +42,7 @@ const App = () => {
               <GniWorld updatePath={updatePath} currentCategory={path.currentCategory} />
             </Route>
             <Route path={path.path}>
-              <Countries groupId={path.groupId} currentPath={path.path} />
+              <Countries groupId={path.groupId} currentPath={path} />
             </Route>
           </Switch>
         </div>
