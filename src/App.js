@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   HashRouter as Router,
   Switch,
@@ -20,16 +20,10 @@ const App = () => {
 
   const [path, setPath] = useState(initialPath);
 
-  useEffect(() => {
-    console.log(path.path);
-  }, [path])
-
   const updatePath = (newPath) => {
     if (path !== newPath) {
       setPath((actualPath) => ({ ...actualPath, ...newPath }));
     }
-    // console.log('current path is', path);
-    // console.log('this path changed to: ', newPath);
   };
 
   return (

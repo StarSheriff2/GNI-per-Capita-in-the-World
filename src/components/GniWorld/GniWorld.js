@@ -21,17 +21,8 @@ const GniWorld = (props) => {
   const [incomeLevels, setIncomeLevels] = useState({ loaded: false, entities: [] });
 
   const getRegions = () => gniWorld.filter((entity) => regionsApiCodes.includes(entity.country.id));
-  const getIncomeLevels = () => gniWorld.filter((entity) => incomeLevelShort.includes(entity.country.id));
-
-  /*  const [categoryFilter, setCategoryFilter] = useState({
-    current,
-    other,
-  }); */
-
-  /* const changeCategoryFilter = () => setCategoryFilter((actualCategory) => ({
-    current: actualCategory.other,
-    other: actualCategory.current,
-  })); */
+  const getIncomeLevels = () => gniWorld.filter((entity) => (
+    incomeLevelShort.includes(entity.country.id)));
 
   useEffect(() => {
     if (gniWorld.length === 0) {

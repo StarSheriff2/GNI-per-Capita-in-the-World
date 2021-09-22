@@ -7,22 +7,10 @@ import styles from './GroupsList.module.scss';
 const GroupsList = ({ groups, category, updatePath }) => {
   const { current, other } = category;
 
-  // const dispatch = useDispatch();
-
-  /*  const groupCountries = useSelector((state) => state.details.entities, shallowEqual);
-
-  const addGroupCountries = (groupId) => {
-    dispatch(fetchDetails(groupId, current));
-  };
-
-  const isGroupCountry = (groupId) => groupId in groupCountries; */
-
-  const path = (str) => {
-    return str
-      .toLowerCase()
-      .replaceAll(' ', '-')
-      .replaceAll('&', 'and');
-  };
+  const path = (str) => str
+    .toLowerCase()
+    .replaceAll(' ', '-')
+    .replaceAll('&', 'and');
 
   const groupIcon = (groupName) => {
     if (groupName.includes('Europe')) {
@@ -78,7 +66,6 @@ const GroupsList = ({ groups, category, updatePath }) => {
             to={`/groups/${path(group.country.value)}/`}
             activeClassName="active-group"
             onClick={() => {
-              console.log('youClicked group: ', group.country.value);
               const groupId = (current === 'region') ? group.countryiso3code : group.country.id;
               updatePath({
                 path: `/groups/${path(group.country.value)}/`,
@@ -88,7 +75,6 @@ const GroupsList = ({ groups, category, updatePath }) => {
                   other,
                 },
               });
-              console.log('path in App: ', path(group.country.value));
             }}
           >
             <div className={`${styles.groupDivContainer}`}>

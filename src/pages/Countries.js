@@ -13,15 +13,12 @@ const Countries = (props) => {
   const { currentPath, groupId } = props;
   const { currentCategory, path } = currentPath;
 
-  console.log('path in COuntries', currentPath);
-
   const dispatch = useDispatch();
 
   const gniWorld = useSelector((state) => state.gniWorld.entities, shallowEqual);
   const groupCountries = useSelector((state) => state.countries.entities, shallowEqual);
   const gniWorldLoadingStatus = useSelector((state) => state.gniWorld.status);
   const countriesLoadingStatus = useSelector((state) => state.countries.status);
-  // const [countries, setCountries] = useState({ mounted: false })
 
   let currentCountries = { fetched: false };
 
@@ -34,7 +31,7 @@ const Countries = (props) => {
 
   if (validateGroupId() in groupCountries) {
     const id = validateGroupId();
-    console.log('groupCOuntries: ', groupCountries[id]);
+
     currentCountries = {
       fetched: true,
       countries: groupCountries[id].map((country) => {
@@ -55,8 +52,6 @@ const Countries = (props) => {
     };
   }
 
-  //  for countries: "id": "ABW",
-  // gni: countryiso3code
   useEffect(() => {
     if (gniWorld.length === 0) {
       dispatch(fetchGniWorld());
@@ -74,11 +69,8 @@ const Countries = (props) => {
     );
   }
 
-  // console.log('current', currentCountries);
-
   return (
     <section>
-      {/* {currentCountries.fetched && console.log('hello')} */}
       <GroupHeader
         currentPath={path}
         groupId={groupId}
@@ -91,7 +83,6 @@ const Countries = (props) => {
               <Country country={country} />
             </li>
           ))}
-        {/* .forEach((country) => console.log('country: ', country)) */}
       </div>
     </section>
   );

@@ -1,6 +1,4 @@
 // API Query Keywords
-// import incomeLevel from '../../filters/incomeLevel';
-// import regions from '../../filters/regions';
 import incomeLevelCodes from '../../filters/incomeLevel';
 
 // Actions
@@ -37,7 +35,6 @@ export const fetchCountries = (groupId, category) => async (dispatch) => {
   dispatch(getCountriesStarted());
   let aggregateFilter;
   let id;
-  // console.log('groupID: ', groupId);
   if (category === 'region') {
     aggregateFilter = category;
     id = groupId;
@@ -45,7 +42,6 @@ export const fetchCountries = (groupId, category) => async (dispatch) => {
     aggregateFilter = 'incomelevel';
     id = incomeLevelCodes[groupId];
   }
-  console.log('countriesSlice___ID: ', id);
   const query = `?format=json&per_page=100&${aggregateFilter}=${id}`;
   try {
     const data = await (await fetch(baseURL + query, {
