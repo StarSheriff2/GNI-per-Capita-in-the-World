@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
@@ -44,17 +44,12 @@ const Header = (props) => {
     </header>
   );
 };
-/*
+
 Header.propTypes = {
   currentPath: PropTypes.shape({
     path: PropTypes.string.isRequired,
-    groupId: PropTypes.string.isRequired,
-    currentCategory: PropTypes.shape({
-      current: PropTypes.string.isRequired,
-      other: PropTypes.string.isRequired,
-    }).isRequired,
   }).isRequired,
   updatePath: PropTypes.func.isRequired,
-}; */
+};
 
 export default Header;

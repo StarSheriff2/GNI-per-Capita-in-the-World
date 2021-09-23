@@ -1,5 +1,5 @@
-// import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { fetchGniWorld } from '../redux/gniWorld/gniWorld';
 import { fetchCountries } from '../redux/countries/countries';
@@ -75,7 +75,7 @@ const Countries = (props) => {
         currentPath={path}
         groupId={groupId}
       />
-      <div className="details-container">
+      <div>
         {currentCountries.fetched && currentCountries.countries
           .sort((a, b) => a.value < b.value)
           .map((country) => (
@@ -88,9 +88,15 @@ const Countries = (props) => {
   );
 };
 
-/* Details.propTypes = {
+Countries.propTypes = {
   groupId: PropTypes.string.isRequired,
-  currentPath: PropTypes.string.isRequired,
-}; */
+  currentPath: PropTypes.shape({
+    currentCategory: PropTypes.shape({
+      current: PropTypes.string.isRequired,
+      other: PropTypes.string.isRequired,
+    }).isRequired,
+    path: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Countries;

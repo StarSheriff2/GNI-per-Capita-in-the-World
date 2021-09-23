@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { fetchGniWorld } from '../../redux/gniWorld/gniWorld';
@@ -59,7 +59,7 @@ const GniWorld = (props) => {
       />
       <div className={`${styles.groupListContainer}`}>
         <GroupsList
-          groups={((regions.category === current) ? regions : incomeLevels)}
+          groups={((regions.category === current) ? regions.entities : incomeLevels.entities)}
           category={{ current, other }}
           updatePath={updatePath}
         />
@@ -68,12 +68,12 @@ const GniWorld = (props) => {
   );
 };
 
-/* GniWorld.propTypes = {
+GniWorld.propTypes = {
   updatePath: PropTypes.func.isRequired,
   currentCategory: PropTypes.shape({
     current: PropTypes.string.isRequired,
     other: PropTypes.string.isRequired,
   }).isRequired,
-}; */
+};
 
 export default GniWorld;

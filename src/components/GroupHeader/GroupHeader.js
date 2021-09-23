@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from './GroupHeader.module.scss';
 
 const GroupHeader = (props) => {
@@ -80,9 +80,9 @@ const GroupHeader = (props) => {
   );
 };
 
-/* GroupHeader.propTypes = {
+GroupHeader.propTypes = {
   currentPath: PropTypes.string.isRequired,
   groupId: PropTypes.string.isRequired,
-}; */
+};
 
 export default GroupHeader;

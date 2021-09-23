@@ -1,7 +1,5 @@
-// import PropTypes from 'prop-types';
-// import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-// import { fetchDetails } from '../../redux/details/details';
 import styles from './GroupsList.module.scss';
 
 const GroupsList = ({ groups, category, updatePath }) => {
@@ -57,7 +55,7 @@ const GroupsList = ({ groups, category, updatePath }) => {
 
   return (
     <>
-      {groups.entities
+      {groups
         .sort((a, b) => a.value < b.value)
         .map((group) => (
           <NavLink
@@ -91,17 +89,15 @@ const GroupsList = ({ groups, category, updatePath }) => {
   );
 };
 
-/* GroupsList.propTypes = {
+GroupsList.propTypes = {
   groups: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    indicator: PropTypes.number.isRequired,
-    id: PropTypes.string.isRequired,
+    Object,
   })).isRequired,
   category: PropTypes.shape({
     current: PropTypes.string.isRequired,
     other: PropTypes.string.isRequired,
   }).isRequired,
   updatePath: PropTypes.func.isRequired,
-}; */
+};
 
 export default GroupsList;
