@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from './Filter.module.scss';
 
 const Filter = (props) => {
@@ -43,10 +43,10 @@ const Filter = (props) => {
   );
 };
 
-/* Filter.propTypes = {
-  changeCategoryFilter: PropTypes.func.isRequired,
+Filter.propTypes = {
+  updatePath: PropTypes.func.isRequired,
   currentCategory: PropTypes.string.isRequired,
   otherCategory: PropTypes.string.isRequired,
-}; */
+};
 
 export default Filter;

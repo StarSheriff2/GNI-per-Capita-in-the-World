@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from './Country.module.scss';
 
 const Country = (props) => {
@@ -26,12 +26,12 @@ const Country = (props) => {
   );
 };
 
-/* Country.propTypes = {
+Country.propTypes = {
   country: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    indicator: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired,
   }).isRequired,
-}; */
+};
 
 export default Country;
