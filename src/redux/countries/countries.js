@@ -47,6 +47,7 @@ export const fetchCountries = (groupId, category) => async (dispatch) => {
     const data = await (await fetch(baseURL + query, {
       mode: 'cors',
     })).json();
+    console.log('data: ', data)
     const newGroup = {
       groupName: id,
       groupCountries: data[1],

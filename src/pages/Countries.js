@@ -13,6 +13,8 @@ const Countries = (props) => {
   const { currentPath, groupId } = props;
   const { currentCategory, path } = currentPath;
 
+  console.log('currentPath: ', currentPath)
+
   const dispatch = useDispatch();
 
   const gniWorld = useSelector((state) => state.gniWorld.entities, shallowEqual);
