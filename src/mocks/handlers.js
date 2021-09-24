@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-const gniUrl = 'https://api.worldbank.org/v2/country/Z4;Z7;ZJ;ZQ;XU;8S;ZG;XM;XN;XT;XD/indicator/NY.GNP.PCAP.CD';
+const gniUrl = 'http://api.worldbank.org/v2/country/all/indicator/NY.GNP.PCAP.CD';
 const gniMockJsonResponse = [
   {
     page: 1,
@@ -63,92 +63,154 @@ const gniMockJsonResponse = [
   ],
 ];
 
-const detailsUrl = 'https://api.worldbank.org/v2/country/AFG;BGD;BTN;IND;LKA;MDV;NPL;PAK/indicator/NY.GNP.PCAP.CD';
-const detailsMockJsonResponse = [
+const countriesUrl = 'https://api.worldbank.org/v2/country/all/';
+const countriesMockJsonResponse = [
   {
     page: 1,
     pages: 1,
-    per_page: 100,
+    per_page: '100',
     total: 8,
-    sourceid: null,
-    sourcename: null,
-    lastupdated: '2021-07-30',
   },
   [
     {
-      indicator: {
-        id: 'NY.GNP.PCAP.CD',
-        value: 'GNI per capita, Atlas method (current US$)',
+      id: 'AFG',
+      iso2Code: 'AF',
+      name: 'Afghanistan',
+      region: {
+        id: 'SAS',
+        iso2code: '8S',
+        value: 'South Asia',
       },
-      country: {
-        id: 'AF',
-        value: 'Afghanistan',
+      adminregion: {
+        id: 'SAS',
+        iso2code: '8S',
+        value: 'South Asia',
       },
-      countryiso3code: 'AFG',
-      date: '2020',
-      value: 500,
-      obs_status: '',
-      decimal: 0,
+      incomeLevel: {
+        id: 'LIC',
+        iso2code: 'XM',
+        value: 'Low income',
+      },
+      lendingType: {
+        id: 'IDX',
+        iso2code: 'XI',
+        value: 'IDA',
+      },
+      capitalCity: 'Kabul',
+      longitude: '69.1761',
+      latitude: '34.5228',
     },
     {
-      indicator: {
-        id: 'NY.GNP.PCAP.CD',
-        value: 'GNI per capita, Atlas method (current US$)',
+      id: 'BGD',
+      iso2Code: 'BD',
+      name: 'Bangladesh',
+      region: {
+        id: 'SAS',
+        iso2code: '8S',
+        value: 'South Asia',
       },
-      country: {
-        id: 'BD',
-        value: 'Bangladesh',
+      adminregion: {
+        id: 'SAS',
+        iso2code: '8S',
+        value: 'South Asia',
       },
-      countryiso3code: 'BGD',
-      date: '2020',
-      value: 2010,
-      obs_status: '',
-      decimal: 0,
+      incomeLevel: {
+        id: 'LMC',
+        iso2code: 'XN',
+        value: 'Lower middle income',
+      },
+      lendingType: {
+        id: 'IDX',
+        iso2code: 'XI',
+        value: 'IDA',
+      },
+      capitalCity: 'Dhaka',
+      longitude: '90.4113',
+      latitude: '23.7055',
     },
     {
-      indicator: {
-        id: 'NY.GNP.PCAP.CD',
-        value: 'GNI per capita, Atlas method (current US$)',
+      id: 'BTN',
+      iso2Code: 'BT',
+      name: 'Bhutan',
+      region: {
+        id: 'SAS',
+        iso2code: '8S',
+        value: 'South Asia',
       },
-      country: {
-        id: 'BT',
-        value: 'Bhutan',
+      adminregion: {
+        id: 'SAS',
+        iso2code: '8S',
+        value: 'South Asia',
       },
-      countryiso3code: 'BTN',
-      date: '2020',
-      value: 2860,
-      obs_status: '',
-      decimal: 0,
+      incomeLevel: {
+        id: 'LMC',
+        iso2code: 'XN',
+        value: 'Lower middle income',
+      },
+      lendingType: {
+        id: 'IDX',
+        iso2code: 'XI',
+        value: 'IDA',
+      },
+      capitalCity: 'Thimphu',
+      longitude: '89.6177',
+      latitude: '27.5768',
     },
     {
-      indicator: {
-        id: 'NY.GNP.PCAP.CD',
-        value: 'GNI per capita, Atlas method (current US$)',
+      id: 'IND',
+      iso2Code: 'IN',
+      name: 'India',
+      region: {
+        id: 'SAS',
+        iso2code: '8S',
+        value: 'South Asia',
       },
-      country: {
-        id: 'IN',
-        value: 'India',
+      adminregion: {
+        id: 'SAS',
+        iso2code: '8S',
+        value: 'South Asia',
       },
-      countryiso3code: 'IND',
-      date: '2020',
-      value: 1900,
-      obs_status: '',
-      decimal: 0,
+      incomeLevel: {
+        id: 'LMC',
+        iso2code: 'XN',
+        value: 'Lower middle income',
+      },
+      lendingType: {
+        id: 'IBD',
+        iso2code: 'XF',
+        value: 'IBRD',
+      },
+      capitalCity: 'New Delhi',
+      longitude: '77.225',
+      latitude: '28.6353',
     },
     {
-      indicator: {
-        id: 'NY.GNP.PCAP.CD',
-        value: 'GNI per capita, Atlas method (current US$)',
+      id: 'PAK',
+      iso2Code: 'PK',
+      name: 'Pakistan',
+      region: {
+        id: 'SAS',
+        iso2code: '8S',
+        value: 'South Asia',
       },
-      country: {
-        id: 'PK',
-        value: 'Pakistan',
+      adminregion: {
+        id: 'SAS',
+        iso2code: '8S',
+        value: 'South Asia',
       },
-      countryiso3code: 'PAK',
-      date: '2020',
-      value: 1280,
-      obs_status: '',
-      decimal: 0,
+      incomeLevel: {
+        id: 'LMC',
+        iso2code: 'XN',
+        value: 'Lower middle income',
+      },
+      lendingType: {
+        id: 'IDB',
+        iso2code: 'XH',
+        value: 'Blend',
+      },
+      capitalCity: 'Islamabad',
+      longitude: '72.8',
+      latitude: '30.5167',
     },
   ],
 ];
@@ -158,9 +220,9 @@ const handlers = [
     ctx.status(200),
     ctx.json(gniMockJsonResponse),
   )),
-  rest.get(detailsUrl, (req, res, ctx) => res(
+  rest.get(countriesUrl, (req, res, ctx) => res(
     ctx.status(200),
-    ctx.json(detailsMockJsonResponse),
+    ctx.json(countriesMockJsonResponse),
   )),
 ];
 

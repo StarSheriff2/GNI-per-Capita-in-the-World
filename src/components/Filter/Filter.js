@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './Filter.module.scss';
 
 const Filter = (props) => {
-  const { currentCategory, otherCategory, changeCategoryFilter } = props;
+  const { currentCategory, otherCategory, updatePath } = props;
 
   let icon = (<i className={`fas fa-globe ${styles.worldIcon}`} />);
 
@@ -23,7 +23,14 @@ const Filter = (props) => {
           <button
             className={`${styles.filterButton}`}
             type="button"
-            onClick={changeCategoryFilter}
+            onClick={() => {
+              updatePath({
+                currentCategory: {
+                  current: otherCategory,
+                  other: currentCategory,
+                },
+              });
+            }}
           >
             {otherCategory.toUpperCase()}
           </button>
@@ -37,7 +44,7 @@ const Filter = (props) => {
 };
 
 Filter.propTypes = {
-  changeCategoryFilter: PropTypes.func.isRequired,
+  updatePath: PropTypes.func.isRequired,
   currentCategory: PropTypes.string.isRequired,
   otherCategory: PropTypes.string.isRequired,
 };

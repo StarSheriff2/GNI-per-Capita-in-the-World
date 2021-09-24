@@ -2,11 +2,11 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import gniWorldReducer from './gniWorld/gniWorld';
-import detailsReducer from './details/details';
+import countriesReducer from './countries/countries';
 
 const reducer = combineReducers({
   gniWorld: gniWorldReducer,
-  details: detailsReducer,
+  countries: countriesReducer,
 });
 
 const store = createStore(

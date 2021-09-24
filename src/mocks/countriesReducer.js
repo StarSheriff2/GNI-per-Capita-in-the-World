@@ -1,6 +1,6 @@
-const FETCH_STARTED = 'gni-per-capita-in-the-world/details/FETCH_STARTED';
-const FETCH_SUCCEDED = 'gni-per-capita-in-the-world/details/FETCH_SUCCEDED';
-const FETCH_FAILED = 'gni-per-capita-in-the-world/details/DETAILS_FAILED';
+const FETCH_STARTED = 'gni-per-capita-in-the-world/countries/FETCH_STARTED';
+const FETCH_SUCCEDED = 'gni-per-capita-in-the-world/countries/FETCH_SUCCEDED';
+const FETCH_FAILED = 'gni-per-capita-in-the-world/countries/COUNTRIES_FAILED';
 
 const initialState = {
   status: 'idle',
@@ -17,20 +17,13 @@ const reducer = (state = initialState, action) => {
     case FETCH_SUCCEDED: {
       const { groupName, groupCountries } = action.payload;
       const newGroup = {};
-      newGroup[groupName] = groupCountries.map((country) => (
-        {
-          name: country.country.value,
-          indicator: country.value,
-          date: country.date,
-        }
-      ));
+      newGroup[groupName] = groupCountries;
       return {
-        ...state,
         entities: {
           ...state.entities,
           ...newGroup,
         },
-        status: 'idle',
+        status: 'succeded',
       };
     }
     case FETCH_FAILED:

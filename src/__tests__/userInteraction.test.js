@@ -9,13 +9,13 @@ import LoadAnimation from '../components/LoadAnimation/LoadAnimation';
 import Header from '../components/Header/Header';
 import Filter from '../components/Filter/Filter';
 import gniWorldReducer from '../mocks/gniReducer';
-import detailsReducer from '../mocks/detailsReducer';
+import countriesReducer from '../mocks/countriesReducer';
 
 afterEach(cleanup);
 
 const reducer = combineReducers({
   gniWorld: gniWorldReducer,
-  details: detailsReducer,
+  countries: countriesReducer,
 });
 
 const renderWithRedux = (component,
@@ -102,7 +102,7 @@ describe('Hompage', () => {
     expect(getByTestId('spinnerSpan').textContent).toBe('Loading...');
   });
 
-  test('When user clicks a region area, the app renders the corrsponding details page', async () => {
+  test('When user clicks a region area, the app renders the corresponding countries page', async () => {
     const { findByText } = renderWithRedux(<App />);
 
     expect(await findByText('South Asia')).toBeInTheDocument();
@@ -118,7 +118,7 @@ describe('Hompage', () => {
   });
 });
 
-describe('Details page by current group', () => {
+describe('Countries page by current group', () => {
   test('When user clicks the back arrow, app goes back to homepage', async () => {
     const { findByText, getByTestId } = renderWithRedux(<App />);
 

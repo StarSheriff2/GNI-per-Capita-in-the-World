@@ -1,22 +1,9 @@
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { fetchDetails } from '../../redux/details/details';
 import styles from './GroupsList.module.scss';
 
-const GroupsList = (props) => {
-  const { groups, category, updatePath } = props;
+const GroupsList = ({ groups, category, updatePath }) => {
   const { current, other } = category;
-
-  const dispatch = useDispatch();
-
-  const groupCountries = useSelector((state) => state.details.entities, shallowEqual);
-
-  const addGroupCountries = (groupId) => {
-    dispatch(fetchDetails(groupId, current));
-  };
-
-  const isGroupCountry = (groupId) => groupId in groupCountries;
 
   const path = (str) => str
     .toLowerCase()
@@ -69,19 +56,18 @@ const GroupsList = (props) => {
   return (
     <>
       {groups
-        .filter((group) => group.category === current)
-        .sort((a, b) => a.indicator < b.indicator)
+        .sort((a, b) => a.value < b.value)
         .map((group) => (
           <NavLink
             className={`${styles.groupContainer}`}
-            key={group.id}
-            to={`/groups/${path(group.name)}/`}
+            key={group.country.id}
+            to={`/groups/${path(group.country.value)}/`}
             activeClassName="active-group"
             onClick={() => {
-              if (!isGroupCountry(group.id)) addGroupCountries(group.id);
+              const groupId = (current === 'region') ? group.countryiso3code : group.country.id;
               updatePath({
-                path: path(`/groups/${path(group.name)}/`),
-                groupId: group.id,
+                path: `/groups/${path(group.country.value)}/`,
+                groupId,
                 currentCategory: {
                   current,
                   other,
@@ -90,11 +76,11 @@ const GroupsList = (props) => {
             }}
           >
             <div className={`${styles.groupDivContainer}`}>
-              {groupIcon(group.name)}
+              {groupIcon(group.country.value)}
               <i className={`far fa-arrow-alt-circle-right ${styles.arrowIcon}`} />
               <div>
-                <h3 className={`${styles.groupName}`}>{group.name}</h3>
-                <p>{`$ ${Math.trunc(group.indicator).toLocaleString()}`}</p>
+                <h3 className={`${styles.groupName}`}>{group.country.value}</h3>
+                <p>{`$ ${Math.trunc(group.value).toLocaleString()}`}</p>
               </div>
             </div>
           </NavLink>
@@ -105,9 +91,7 @@ const GroupsList = (props) => {
 
 GroupsList.propTypes = {
   groups: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    indicator: PropTypes.number.isRequired,
-    id: PropTypes.string.isRequired,
+    Object,
   })).isRequired,
   category: PropTypes.shape({
     current: PropTypes.string.isRequired,

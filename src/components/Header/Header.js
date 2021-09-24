@@ -48,11 +48,6 @@ const Header = (props) => {
 Header.propTypes = {
   currentPath: PropTypes.shape({
     path: PropTypes.string.isRequired,
-    groupId: PropTypes.string.isRequired,
-    currentCategory: PropTypes.shape({
-      current: PropTypes.string.isRequired,
-      other: PropTypes.string.isRequired,
-    }).isRequired,
   }).isRequired,
   updatePath: PropTypes.func.isRequired,
 };

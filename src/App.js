@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import Header from './components/Header/Header';
 import GniWorld from './components/GniWorld/GniWorld';
-import Details from './pages/Details';
+import Countries from './pages/Countries';
 
 const App = () => {
   const initialPath = {
@@ -22,7 +22,7 @@ const App = () => {
 
   const updatePath = (newPath) => {
     if (path !== newPath) {
-      setPath(() => newPath);
+      setPath((actualPath) => ({ ...actualPath, ...newPath }));
     }
   };
 
@@ -36,7 +36,7 @@ const App = () => {
               <GniWorld updatePath={updatePath} currentCategory={path.currentCategory} />
             </Route>
             <Route path={path.path}>
-              <Details groupId={path.groupId} currentPath={path.path} />
+              <Countries groupId={path.groupId} currentPath={path} />
             </Route>
           </Switch>
         </div>
