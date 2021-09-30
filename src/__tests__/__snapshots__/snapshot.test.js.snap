@@ -18,98 +18,50 @@ exports[`App Renders the Homepage 1`] = `
       gni per capita in the world
     </p>
   </header>
-  <section>
+  <section
+    className="spinnerContainer"
+  >
     <div
-      className="filterContainer"
+      className="spinner-border"
+      role="status"
+      style={
+        Object {
+          "height": "14rem",
+          "width": "14rem",
+        }
+      }
     >
-      <div
-        className="d-flex iconContainer"
+      <span
+        className="sr-only"
+        data-testid="spinnerSpan"
       >
-        <i
-          className="fas fa-globe worldIcon"
-        />
-      </div>
-      <div
-        className="filterController"
-      >
-        <h2
-          className="currentCategory"
-          data-testid="currentCategory"
-        >
-          REGIONS
-        </h2>
-        <p
-          className="filterLabel"
-        >
-          Filter Category: 
-        </p>
-        <button
-          className="filterButton"
-          onClick={[Function]}
-          type="button"
-        >
-          INCOME
-        </button>
-      </div>
+        Loading...
+      </span>
     </div>
-    <p
-      className="indicatorDescription"
-    >
-      indicators by country region
-    </p>
-    <div
-      className="groupListContainer"
-    />
   </section>
 </div>
 `;
 
-exports[`Details Renders the Details page 1`] = `
-<section>
+exports[`Countries Renders the Countries page 1`] = `
+<section
+  className="spinnerContainer"
+>
   <div
-    className="filterContainer"
+    className="spinner-border"
+    role="status"
+    style={
+      Object {
+        "height": "14rem",
+        "width": "14rem",
+      }
+    }
   >
-    <div
-      className="d-flex iconContainer"
+    <span
+      className="sr-only"
+      data-testid="spinnerSpan"
     >
-      <div
-        className="incomeLevelIconDiv"
-      >
-        <i
-          className="fas fa-dollar-sign incomeLevelIcon"
-        />
-        <i
-          className="fas fa-dollar-sign incomeLevelIcon"
-        />
-        <i
-          className="fas fa-dollar-sign incomeLevelIcon"
-        />
-      </div>
-    </div>
-    <div
-      className="filterController"
-    >
-      <h2
-        className="currentGroup"
-      >
-        
-      </h2>
-      <p
-        className="groupIndicator"
-      >
-        $ 0
-      </p>
-    </div>
-  </div>
-  <p
-    className="indicatorDescription"
-  >
-    country breakdown
-  </p>
-  <div
-    className="details-container"
-  >
-    
+      Loading...
+    </span>
   </div>
 </section>
 `;

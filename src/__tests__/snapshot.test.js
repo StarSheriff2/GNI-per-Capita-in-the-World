@@ -5,7 +5,7 @@ import App from '../App';
 import store from '../redux/configureStore';
 import Header from '../components/Header/Header';
 import GniWorld from '../components/GniWorld/GniWorld';
-import Details from '../pages/Details';
+import Countries from '../pages/Countries';
 
 describe('App', () => {
   it('Renders the Homepage', () => {
@@ -67,19 +67,24 @@ describe('GniWorld', () => {
   });
 });
 
-describe('Details', () => {
-  it('Renders the Details page', () => {
+describe('Countries', () => {
+  it('Renders the Countries page', () => {
     const groupId = 'EAS';
-    const pathX = '/';
+    const pathX = {
+      currentCategory: {
+        current: 'region',
+        other: 'income',
+      },
+    };
 
-    const details = TestRenderer.create(
+    const countries = TestRenderer.create(
       <Provider store={store}>
-        <Details
+        <Countries
           groupId={groupId}
           currentPath={pathX}
         />
       </Provider>,
     ).toJSON();
-    expect(details).toMatchSnapshot();
+    expect(countries).toMatchSnapshot();
   });
 });

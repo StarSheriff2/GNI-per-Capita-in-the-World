@@ -7,7 +7,9 @@ const GroupHeader = (props) => {
   const { currentPath, groupId } = props;
 
   const groups = useSelector((state) => state.gniWorld.entities, shallowEqual);
-  const currentGroup = groups.filter((group) => group.id === groupId);
+  const currentGroup = groups.filter((group) => (
+    ((group.countryiso3code.length === 0) ? group.country.id : group.countryiso3code) === groupId
+  ));
 
   const extractGroupName = currentPath
     .replace(/groups\//, '')
@@ -68,7 +70,9 @@ const GroupHeader = (props) => {
         </div>
         <div className={`${styles.filterController}`}>
           <h2 className={`${styles.currentGroup}`}>{extractGroupName}</h2>
-          <p className={`${styles.groupIndicator}`}>{`$ ${(currentGroup.length !== 0) ? Math.trunc(currentGroup[0].indicator).toLocaleString() : 0}`}</p>
+          <p className={`${styles.groupIndicator}`}>
+            {`$ ${(currentGroup.length !== 0) ? Math.trunc(currentGroup[0].value).toLocaleString() : 0}`}
+          </p>
         </div>
       </div>
       <p className={`${styles.indicatorDescription}`}>country breakdown</p>
