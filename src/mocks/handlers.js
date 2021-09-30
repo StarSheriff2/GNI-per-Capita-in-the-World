@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-const gniUrl = 'http://api.worldbank.org/v2/country/all/indicator/NY.GNP.PCAP.CD';
+const gniUrl = 'https://api.worldbank.org/v2/country/all/indicator/NY.GNP.PCAP.CD';
 const gniMockJsonResponse = [
   {
     page: 1,
