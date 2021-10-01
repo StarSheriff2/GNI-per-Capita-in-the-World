@@ -38,7 +38,7 @@ For testing I used Jest, React's Testing Library, and MSW (for API mocking).
 
 ### Live Demo
 
-Deployed to Netlify: [Live Demo](https://agitated-sinoussi-e23bf8.netlify.app/#/)
+I have deployed this app to Netlify: [Live Demo](https://agitated-sinoussi-e23bf8.netlify.app/#/)
 
 ### Video Presentation
 
